@@ -1,0 +1,9 @@
+{
+  "properties": [
+    {
+      "name": "spring.mail.auth-code-expiration-millis",
+      "type": "java.lang.String",
+      "description": "Description for spring.mail.auth-code-expiration-millis."
+    }
+  ]
+}

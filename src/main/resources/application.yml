@@ -1,0 +1,54 @@
+spring:
+  profiles:
+    active: local
+
+  datasource:
+    url: jdbc:h2:tcp://localhost/~/solbangul-rest
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: scpark0698@gmail.com
+    password: cipfvewwuvmxxyez
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+    auth-code-expiration-millis: 1800000  # 30 * 60 * 1000 == 30분
+
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+  servlet:
+    multipart:
+      max-file-size: 10MB
+
+file:
+  dir: /Users/sangcheol/image/
+
+logging.level:
+  org.hibernate.SQL: debug
+  org.hibernate.orm.jdbc.bind: trace
+
+server:
+  servlet:
+    session:
+      timeout: 30m
