@@ -6,9 +6,15 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import org.hibernate.annotations.ColumnDefault;
+
+import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Getter
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
 public class HanwhaUser {
 
@@ -19,4 +25,22 @@ public class HanwhaUser {
 
 	private String username;
 	private String gitEmail;
+
+	@ColumnDefault("false")
+	private Boolean isMember;
+
+	@Builder
+	public HanwhaUser(String username, String gitEmail, Boolean isMember) {
+		this.username = username;
+		this.gitEmail = gitEmail;
+		this.isMember = isMember;
+	}
+
+	public void createAccount() {
+		this.isMember = true;
+	}
+
+	public void deleteAccount() {
+		this.isMember = false;
+	}
 }
