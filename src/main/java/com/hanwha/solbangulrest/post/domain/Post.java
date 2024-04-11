@@ -18,6 +18,7 @@ import jakarta.persistence.OneToMany;
 
 import com.hanwha.solbangulrest.BaseTimeEntity;
 import com.hanwha.solbangulrest.comment.domain.Comment;
+import com.hanwha.solbangulrest.room.domain.Room;
 import com.hanwha.solbangulrest.user.domain.User;
 
 import lombok.AccessLevel;
@@ -39,14 +40,15 @@ public class Post extends BaseTimeEntity {
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "room_id")
+	private Room room;
+
 	@Column(name = "post_title")
 	private String title;
 
 	@Column(name = "post_content")
 	private String content;
-
-	@Column(name = "post_writer")
-	private String writer;
 
 	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
 	private List<Comment> comments = new ArrayList<>();
@@ -54,27 +56,25 @@ public class Post extends BaseTimeEntity {
 	@Enumerated(EnumType.STRING)
 	private Category category;
 
-	private Boolean anonymousYn = false;
-	private Integer viewCount = 0;
-	private Integer likesCount = 0;
+	private Boolean anonymousYn;
+	private Integer viewCount;
+	private Integer likesCount;
 
 	@Builder
-	public Post(User user, String title, String content, String writer, Category category, Boolean anonymousYn,
-		Integer viewCount, Integer likesCount) {
+	public Post(User user, Room room, String title, String content, Category category, Boolean anonymousYn) {
 		this.user = user;
+		this.room = room;
 		this.title = title;
 		this.content = content;
-		this.writer = writer;
 		this.category = category;
 		this.anonymousYn = anonymousYn;
-		this.viewCount = viewCount;
-		this.likesCount = likesCount;
+		this.viewCount = 0;
+		this.likesCount = 0;
 	}
 
-	public void update(String title, String content, String writer, Category category, Boolean anonymousYn) {
+	public void update(String title, String content, Category category, Boolean anonymousYn) {
 		this.title = title;
 		this.content = content;
-		this.writer = writer;
 		this.category = category;
 		this.anonymousYn = anonymousYn;
 	}

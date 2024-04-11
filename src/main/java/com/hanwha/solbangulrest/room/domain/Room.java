@@ -33,10 +33,9 @@ public class Room {
 	private String introduction;
 
 	@Builder
-	public Room(String roomName, String introduction, User user) {
+	public Room(String roomName, String introduction) {
 		this.roomName = roomName;
 		this.introduction = introduction;
-		this.user = user;
 	}
 
 	public void update(String roomName, String introduction) {

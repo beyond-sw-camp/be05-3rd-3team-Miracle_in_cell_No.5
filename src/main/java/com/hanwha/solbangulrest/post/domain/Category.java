@@ -4,7 +4,7 @@ import lombok.Getter;
 
 @Getter
 public enum Category {
-	CLAIMS("칭찬"), COMPLIMENT("건의"), FREE("자유");
+	CLAIMS("건의"), COMPLIMENT("칭찬"), FREE("자유");
 
 	private final String value;
 
