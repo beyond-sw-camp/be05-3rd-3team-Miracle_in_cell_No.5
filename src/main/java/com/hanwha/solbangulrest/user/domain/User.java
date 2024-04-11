@@ -52,7 +52,7 @@ public class User extends BaseTimeEntity {
 
 	@Builder
 	public User(Room room, HanwhaUser hanwhaUser, String loginId, String password, String nickname, String profileImage,
-		Role role, Integer solbangul) {
+		Role role) {
 		this.room = room;
 		this.hanwhaUser = hanwhaUser;
 		this.loginId = loginId;
@@ -60,7 +60,7 @@ public class User extends BaseTimeEntity {
 		this.nickname = nickname;
 		this.profileImage = profileImage;
 		this.role = role;
-		this.solbangul = solbangul;
+		this.solbangul = 0;
 	}
 
 	public void updateProfile(String nickname, String profileImage) {
