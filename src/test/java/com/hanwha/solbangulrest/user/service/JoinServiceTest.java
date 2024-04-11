@@ -153,7 +153,7 @@ class JoinServiceTest {
 
 		// when
 		Long id = joinService.join(user);
-		User findUser = userRepository.findById(id).get();
+		User findUser = userRepository.findById(id).orElseThrow();
 		HanwhaUser findHanwhaUser = findUser.getHanwhaUser();
 		Room findRoom = findUser.getRoom();
 
@@ -162,6 +162,7 @@ class JoinServiceTest {
 		assertThat(userRepository.existsByNickname(nickname)).isTrue();
 		assertThat(findUser.getLoginId()).isEqualTo(loginId);
 		assertThat(findUser.getNickname()).isEqualTo(nickname);
+		assertThat(findUser.getSolbangul()).isEqualTo(0);
 		assertThat(findHanwhaUser.getGitEmail()).isEqualTo(HANWHA_USER_EMAIL_1);
 		assertThat(findHanwhaUser.getUsername()).isEqualTo(USER_NAME);
 		assertThat(findHanwhaUser.getIsMember()).isTrue();
@@ -170,8 +171,8 @@ class JoinServiceTest {
 		assertThat(findRoom.getIntroduction()).isEqualTo("안녕하세요! " + nickname + "의 방입니다.");
 	}
 
-	private static JoinUserDto getJoinUserDto(String loginId, String password,
-		String passwordConfirm, String gitEmail, String nickname) {
+	private static JoinUserDto getJoinUserDto(String loginId, String password, String passwordConfirm, String gitEmail,
+		String nickname) {
 		return JoinUserDto.builder()
 			.loginId(loginId)
 			.password(password)
