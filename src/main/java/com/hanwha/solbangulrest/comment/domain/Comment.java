@@ -40,15 +40,15 @@ public class Comment extends BaseTimeEntity {
 	@Column(name = "comment_content")
 	private String content;
 
-	@Column(name = "comment_writer")
-	private String writer;
+	@Column(name = "comment_author")
+	private String author;
 
 	@Builder
-	public Comment(Post post, User user, String content, String writer) {
+	public Comment(Post post, User user, String content, String author) {
 		this.post = post;
 		this.user = user;
 		this.content = content;
-		this.writer = writer;
+		this.author = author;
 	}
 
 	public void update(String content) {

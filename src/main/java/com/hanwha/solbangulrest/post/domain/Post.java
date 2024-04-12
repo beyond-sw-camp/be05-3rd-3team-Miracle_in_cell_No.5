@@ -38,7 +38,7 @@ public class Post extends BaseTimeEntity {
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-	private User user;
+	private User author;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "room_id")
@@ -61,8 +61,8 @@ public class Post extends BaseTimeEntity {
 	private Integer likesCount;
 
 	@Builder
-	public Post(User user, Room room, String title, String content, Category category, Boolean anonymousYn) {
-		this.user = user;
+	public Post(User author, Room room, String title, String content, Category category, Boolean anonymousYn) {
+		this.author = author;
 		this.room = room;
 		this.title = title;
 		this.content = content;

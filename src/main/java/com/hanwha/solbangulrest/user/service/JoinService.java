@@ -28,11 +28,9 @@ public class JoinService {
 	public Long join(JoinUserDto joinUserDto) {
 		validateJoinUser(joinUserDto);
 
+		HanwhaUser hanwhaUser = getHanwhaUser(joinUserDto.getGitEmail());
 		setEncodePassword(joinUserDto);
 		setProfileImage(joinUserDto);
-
-		HanwhaUser hanwhaUser = getHanwhaUser(joinUserDto.getGitEmail());
-
 		User user = joinUserDto.toEntity(hanwhaUser);
 
 		// 회원가입 시, room 자동으로 생성
