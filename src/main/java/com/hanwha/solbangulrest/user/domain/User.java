@@ -21,7 +21,9 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
+@Slf4j
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Entity
@@ -76,5 +78,18 @@ public class User extends BaseTimeEntity {
 	public void addRoom(Room room) {
 		this.room = room;
 		room.setUser(this);
+	}
+
+	public void addSolbangul(Integer solbangul) {
+		log.info("{}님의 솔방울이 {}개 올랐습니다.", loginId, solbangul);
+		this.solbangul += solbangul;
+	}
+
+	public void minusSolbangul(Integer solbangul) {
+		if ((this.solbangul - solbangul) < 0) {
+			throw new IllegalArgumentException("솔방울이 부족합니다.");
+		}
+		log.info("{}님의 솔방울이 {}개 감소했습니다.", loginId, solbangul);
+		this.solbangul -= solbangul;
 	}
 }
