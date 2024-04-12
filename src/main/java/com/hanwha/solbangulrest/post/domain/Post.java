@@ -50,7 +50,7 @@ public class Post extends BaseTimeEntity {
 	@Column(name = "post_content")
 	private String content;
 
-	@OneToMany(mappedBy = "post", cascade = CascadeType.ALL, orphanRemoval = true)
+	@OneToMany(mappedBy = "post", cascade = CascadeType.REMOVE, orphanRemoval = true)
 	private List<Comment> comments = new ArrayList<>();
 
 	@Enumerated(EnumType.STRING)
@@ -63,7 +63,7 @@ public class Post extends BaseTimeEntity {
 	@Builder
 	public Post(User author, Room room, String title, String content, Category category, Boolean anonymousYn) {
 		this.author = author;
-		this.room = room;
+		addRoom(room);
 		this.title = title;
 		this.content = content;
 		this.category = category;
@@ -83,5 +83,15 @@ public class Post extends BaseTimeEntity {
 	public void addComment(Comment comment) {
 		comment.setPost(this);
 		comments.add(comment);
+	}
+
+	// 연관관계 편의 메서드
+	public void addRoom(Room room) {
+		this.room = room;
+		room.getPosts().add(this);
+	}
+
+	public void viewCountUp() {
+		this.viewCount++;
 	}
 }
