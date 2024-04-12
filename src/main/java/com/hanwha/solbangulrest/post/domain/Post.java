@@ -91,6 +91,10 @@ public class Post extends BaseTimeEntity {
 		room.getPosts().add(this);
 	}
 
+	public void removeComment(Comment comment) {
+		this.comments.remove(comment);
+	}
+
 	public void viewCountUp() {
 		this.viewCount++;
 	}

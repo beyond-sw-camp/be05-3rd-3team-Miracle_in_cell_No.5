@@ -35,7 +35,7 @@ public class PostService {
 	private final UserRepository userRepository;
 
 	@Transactional
-	public void save(PostSaveRequestDto postSaveRequestDto) {
+	public Long save(PostSaveRequestDto postSaveRequestDto) {
 		User author = userRepository.findById(postSaveRequestDto.getUserId()).orElseThrow(
 			() -> new IllegalArgumentException("해당 user가 없습니다. id=" + postSaveRequestDto.getUserId()));
 
@@ -46,11 +46,12 @@ public class PostService {
 		Category category = post.getCategory();
 		if (postRepository.existsByLastPost(author, room, category)) {
 			postRepository.save(post);
-			return;
+			return post.getId();
 		}
 		calculateSolbangul(author, room, category);
 
 		postRepository.save(post);
+		return post.getId();
 	}
 
 	private static void calculateSolbangul(User author, Room room, Category category) {
@@ -80,6 +81,8 @@ public class PostService {
 	public void delete(Long id) {
 		Post post = postRepository.findById(id)
 			.orElseThrow(() -> new IllegalArgumentException("해당 게시글이 없습니다. id " + id));
+		Room room = post.getRoom();
+		room.removePost(post);
 		postRepository.delete(post);
 	}
 
