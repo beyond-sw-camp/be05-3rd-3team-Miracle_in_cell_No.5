@@ -10,6 +10,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
+import com.hanwha.solbangulrest.hanwhauser.domain.HanwhaUser;
+import com.hanwha.solbangulrest.hanwhauser.repository.HanwhaUserRepository;
 import com.hanwha.solbangulrest.mail.config.RedisUtil;
 
 import lombok.RequiredArgsConstructor;
@@ -24,11 +26,13 @@ public class MailSendService {
 	private int authNumber;
 
 	private final RedisUtil redisUtil;
+	private final HanwhaUserRepository hanwhaUserRepository;
 
 	@Value("${spring.mail.username}")
 	private String fromMail;
 
 	public String sendEmail(String toMail) {
+		validateEmail(toMail);
 		makeRandomNumber();
 		String title = "솔방울 회원 가입 인증 이메일 입니다.";
 		String content =
@@ -39,6 +43,15 @@ public class MailSendService {
 				"인증번호를 정확히 입력해주세요!";
 		sendMail(fromMail, toMail, title, content);
 		return Integer.toString(authNumber);
+	}
+
+	private void validateEmail(String email) {
+		HanwhaUser hanwhaUser = hanwhaUserRepository.findHanwhaUserByGitEmail(email)
+			.orElseThrow(() -> new IllegalArgumentException("한화 SW교육 5기생만 가입 가능합니다."));
+
+		if (hanwhaUser.getIsMember() == null || hanwhaUser.getIsMember()) {
+			throw new IllegalArgumentException("이미 가입된 이메일입니다.");
+		}
 	}
 
 	public boolean CheckAuthNum(String email, String authNum) {

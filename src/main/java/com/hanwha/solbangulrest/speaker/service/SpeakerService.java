@@ -24,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 public class SpeakerService {
 
 	public static final int SPEAKER_PRICE = 10;
-	
+
 	private final SpeakerRepository speakerRepository;
 	private final UserRepository userRepository;
 
@@ -38,7 +38,9 @@ public class SpeakerService {
 
 	@Transactional
 	public Long saveSpeaker(SpeakerDto speakerDto) {
-		User user = userRepository.findByLoginId(speakerDto.getLoginId());
+		User user = userRepository.findByLoginId(speakerDto.getLoginId())
+			.orElseThrow(() -> new IllegalArgumentException("해당 사용자를 찾을 수 없습니다. username=" + speakerDto.getLoginId()));
+		
 		LocalDateTime startTime = getLocalDateTime(speakerDto);
 		Speaker speaker = Speaker.builder()
 			.startTime(startTime)
