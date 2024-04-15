@@ -23,10 +23,12 @@ public class MainController {
 		User user = userRepository.findByLoginId(loginId)
 			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
 		return JoinUserDto.builder().
-			loginId(user.getLoginId()).
-			username(user.getHanwhaUser().getUsername())
+			loginId(user.getLoginId())
+			.password(user.getPassword())
+			.username(user.getHanwhaUser().getUsername())
 			.nickname(user.getNickname())
 			.gitEmail(user.getHanwhaUser().getGitEmail())
+			.profileImage(user.getProfileImage())
 			.build();
 	}
 }
