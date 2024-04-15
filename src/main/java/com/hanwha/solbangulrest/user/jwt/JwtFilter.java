@@ -16,6 +16,7 @@ import com.hanwha.solbangulrest.user.domain.Role;
 import com.hanwha.solbangulrest.user.domain.User;
 import com.hanwha.solbangulrest.user.dto.CustomUserDetails;
 
+import io.jsonwebtoken.ExpiredJwtException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -39,8 +40,18 @@ public class JwtFilter extends OncePerRequestFilter {
 
 		String token = authorization.split(" ")[1];
 
-		if (jwtUtil.isExpired(token)) {
+		// if () {
+		// 	log.info("토큰이 만료되었습니다.");
+		// 	filterChain.doFilter(request, response);
+		//
+		// 	return;
+		// }
+
+		try {
+			jwtUtil.isExpired(token);
+		} catch (ExpiredJwtException e) {
 			log.info("토큰이 만료되었습니다.");
+			response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 			filterChain.doFilter(request, response);
 
 			return;

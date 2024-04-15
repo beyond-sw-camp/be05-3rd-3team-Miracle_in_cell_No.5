@@ -11,10 +11,12 @@ import com.hanwha.solbangulrest.hanwhauser.repository.HanwhaUserRepository;
 import com.hanwha.solbangulrest.room.domain.Room;
 import com.hanwha.solbangulrest.user.domain.User;
 import com.hanwha.solbangulrest.user.dto.JoinUserDto;
+import com.hanwha.solbangulrest.user.dto.PasswordResetDto;
 import com.hanwha.solbangulrest.user.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
+@Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Service
 public class JoinService {
@@ -87,6 +89,13 @@ public class JoinService {
 			.roomName(user.getNickname() + "의 방")
 			.introduction("안녕하세요! " + user.getNickname() + "의 방입니다.")
 			.build();
+	}
+	
+	public void passwordReset(String gitEmail, PasswordResetDto passwordResetDto) {
+		User user = userRepository.findByGitEmail(gitEmail)
+			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+		String encodePassword = passwordEncoder.encode(passwordResetDto.getResetPassword());
+		user.updatePassword(encodePassword);
 	}
 }
 
