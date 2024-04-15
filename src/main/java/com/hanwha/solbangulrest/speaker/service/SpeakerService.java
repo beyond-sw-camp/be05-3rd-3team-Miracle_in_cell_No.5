@@ -28,19 +28,11 @@ public class SpeakerService {
 	private final SpeakerRepository speakerRepository;
 	private final UserRepository userRepository;
 
-	public String getSpeakerContent() {
-		return speakerRepository.findCurrentSpeakerContent();
-	}
-
-	public List<LocalDateTime> findReservedSpeakers() {
-		return speakerRepository.findReservedSpeakerTimes();
-	}
-
 	@Transactional
-	public Long saveSpeaker(SpeakerDto speakerDto) {
-		User user = userRepository.findByLoginId(speakerDto.getLoginId())
-			.orElseThrow(() -> new IllegalArgumentException("해당 사용자를 찾을 수 없습니다. username=" + speakerDto.getLoginId()));
-		
+	public Long saveSpeaker(String loginId, SpeakerDto speakerDto) {
+		User user = userRepository.findByLoginId(loginId)
+			.orElseThrow(() -> new IllegalArgumentException("해당 사용자를 찾을 수 없습니다. username=" + loginId));
+
 		LocalDateTime startTime = getLocalDateTime(speakerDto);
 		Speaker speaker = Speaker.builder()
 			.startTime(startTime)
@@ -59,5 +51,10 @@ public class SpeakerService {
 		LocalDate reservationDate = speakerDto.getReservationDate();
 		LocalTime reservationTime = speakerDto.getReservationTime();
 		return LocalDateTime.of(reservationDate, reservationTime);
+	}
+
+	public List<SpeakerDto> findAll() {
+		List<Speaker> speakers = speakerRepository.findAll();
+		return speakers.stream().map(SpeakerDto::new).toList();
 	}
 }
