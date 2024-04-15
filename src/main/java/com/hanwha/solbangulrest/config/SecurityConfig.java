@@ -27,6 +27,19 @@ import lombok.RequiredArgsConstructor;
 @EnableWebSecurity
 public class SecurityConfig {
 
+	private static final String[] AUTH_WHITELIST = {
+		"/login",
+		"/logout",
+		"/join/**",
+		"/password/**",
+		"/mail/**",
+		"/error/**",
+		"/css/**",
+		"/img/**",
+		"/js/**",
+		"/images/**"
+	};
+
 	private final AuthenticationConfiguration authenticationConfiguration;
 	private final JwtUtil jwtUtil;
 
@@ -46,7 +59,9 @@ public class SecurityConfig {
 		http
 			.authorizeHttpRequests(auth -> auth
 				.requestMatchers("/login", "/logout", "/join/**", "/password/**", "/mail/**",
-					"/error/**", "/css/**", "/img/**", "/js/**", "/images/**").permitAll()
+					"/error/**", "/css/**", "/img/**", "/js/**", "/images/**",
+					"/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/swagger-resource/**",
+					"/swagger-resources").permitAll()
 				.requestMatchers("/admin/**").hasRole("ADMIN")
 				.anyRequest().authenticated()
 			);
