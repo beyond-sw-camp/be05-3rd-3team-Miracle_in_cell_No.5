@@ -48,6 +48,6 @@ public class RoomService {
 		Room room = roomRepository.findById(id).orElseThrow(()
 			-> new IllegalArgumentException("해당 room이 없습니다. id=" + id));
 
-		room.update(roomUpdateDto.getIntroduction(), roomUpdateDto.getRoomName());
+		room.update(roomUpdateDto.getRoomName(),roomUpdateDto.getIntroduction());
 	}
 }
