@@ -9,13 +9,13 @@ import lombok.Setter;
 @Setter
 public class RoomResponseDto {
 
-	private Long id ;
+	private Long id;
 	private String roomName;
 	private String introduction;
 	private String profileImage;
 
 	public RoomResponseDto(Room room) {
-		this.id = room.getId() ;
+		this.id = room.getId();
 		this.roomName = room.getRoomName();
 		this.introduction = room.getIntroduction();
 		this.profileImage = room.getUser().getProfileImage();
