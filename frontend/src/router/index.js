@@ -3,7 +3,6 @@ import Main  from '../page/MainPage.vue' ;
 import Room  from '../page/RoomPage.vue' ; 
 import ViewRoom  from '../page/ViewRoom.vue' ; 
 import ViewRooms  from '../page/ViewRooms.vue' ; 
-import CreateRoom  from '../page/CreateRoom.vue' ; 
 import EditRoom  from '../page/EditRoom.vue' ; 
 
 const router = createRouter({
@@ -17,10 +16,6 @@ const router = createRouter({
                     path: "",
                     component : ViewRooms,
                 },
-                {
-                    path :"createroom",
-                    component: CreateRoom,
-                }
             ]
         },
         {
