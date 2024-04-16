@@ -16,6 +16,8 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.hanwha.solbangulrest.global.common.Result;
 import com.hanwha.solbangulrest.user.dto.CustomUserDetails;
 
 import lombok.RequiredArgsConstructor;
@@ -48,6 +50,15 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 		String token = jwtUtil.createToken(loginId, role, 60 * 60 * 1000L);
 
 		response.addHeader("Authorization", "Bearer " + token);
+		Result<Void> result = new Result<>(true, "로그인 성공", null);
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		String json = objectMapper.writeValueAsString(result);
+
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+
+		response.getWriter().write(json);
 	}
 
 	private static String getRole(CustomUserDetails userDetails) {
@@ -61,6 +72,14 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 	@Override
 	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response,
 		AuthenticationException failed) throws IOException, ServletException {
-		response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "로그인 정보가 올바르지 않습니다.");
+		Result<Void> result = new Result<>(false, "로그인 실패", null);
+
+		ObjectMapper objectMapper = new ObjectMapper();
+		String json = objectMapper.writeValueAsString(result);
+
+		response.setContentType("application/json");
+		response.setCharacterEncoding("utf-8");
+
+		response.getWriter().write(json);
 	}
 }

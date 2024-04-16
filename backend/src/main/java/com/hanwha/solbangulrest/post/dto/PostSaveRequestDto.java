@@ -13,7 +13,7 @@ import lombok.Setter;
 @Setter
 public class PostSaveRequestDto {
 
-	private Long userId;
+	private String loginId;
 	private Long roomId;
 	private String title;
 	private String content;
@@ -32,9 +32,9 @@ public class PostSaveRequestDto {
 	}
 
 	@Builder
-	public PostSaveRequestDto(Long userId, Long roomId, String title, String content, Boolean anonymousYn,
+	public PostSaveRequestDto(String loginId, Long roomId, String title, String content, Boolean anonymousYn,
 		Category category) {
-		this.userId = userId;
+		this.loginId = loginId;
 		this.roomId = roomId;
 		this.title = title;
 		this.content = content;

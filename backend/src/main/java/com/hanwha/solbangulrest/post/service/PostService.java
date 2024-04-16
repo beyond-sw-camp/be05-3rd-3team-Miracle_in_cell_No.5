@@ -36,8 +36,8 @@ public class PostService {
 
 	@Transactional
 	public Long save(PostSaveRequestDto postSaveRequestDto) {
-		User author = userRepository.findById(postSaveRequestDto.getUserId()).orElseThrow(
-			() -> new IllegalArgumentException("해당 user가 없습니다. id=" + postSaveRequestDto.getUserId()));
+		User author = userRepository.findByLoginId(postSaveRequestDto.getLoginId()).orElseThrow(
+			() -> new IllegalArgumentException("해당 user가 없습니다. id=" + postSaveRequestDto.getLoginId()));
 
 		Room room = roomRepository.findById(postSaveRequestDto.getRoomId()).orElseThrow(
 			() -> new IllegalArgumentException("해당 room이 없습니다. id=" + postSaveRequestDto.getRoomId()));
@@ -67,8 +67,7 @@ public class PostService {
 		Post post = postRepository.findById(id).orElseThrow(
 			() -> new IllegalArgumentException("해당 post가 없습니다. id=" + id));
 
-		post.update(postUpdateDto.getTitle(), postUpdateDto.getContent(), postUpdateDto.getCategory(),
-			postUpdateDto.getAnonymousYn());
+		post.update(postUpdateDto.getTitle(), postUpdateDto.getContent(), postUpdateDto.getAnonymousYn());
 	}
 
 	public PostResponseDto findById(Long id) {
@@ -112,7 +111,8 @@ public class PostService {
 	}
 
 	public List<Post> findAll() {
-		return postRepository.findAll();
+		List<Post> posts = postRepository.findAll();
+		return posts;
 	}
 
 	@Transactional
