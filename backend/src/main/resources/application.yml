@@ -10,7 +10,7 @@ spring:
 
   jpa:
     hibernate:
-      ddl-auto: validate
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
@@ -42,7 +42,7 @@ spring:
       max-file-size: 10MB
 
 file:
-  dir: /Users/sangcheol/image/
+  dir: /Users/chaewon/image/
 
 logging.level:
   org.hibernate.SQL: debug

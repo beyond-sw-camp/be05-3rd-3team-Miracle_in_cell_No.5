@@ -1,0 +1,194 @@
+.roomInfo-container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    background-color: #FF9900;
+    /* height: 90vh; */
+    width: 100vw;
+    flex-grow: 1;
+}
+.roomInfo{
+    flex-grow: 1;
+    background-color: #5F73B0;
+    border-top-left-radius: 60px;
+    border-top-right-radius: 60px;
+    width: 90%;
+    margin-top: 100px;
+    position: relative;
+   
+}
+
+.write-btn{
+    border: 0;
+    background-color: white;
+    width: 200px;
+    height: 81px;
+    border-radius: 20px;
+    &:hover {
+        animation: jelly 0.5s;
+    }
+}
+
+@keyframes jelly {
+    25% {
+      transform: scale(0.9, 1.1);
+    }
+  
+    50% {
+      transform: scale(1.1, 0.9);
+    }
+  
+    75% {
+      transform: scale(0.95, 1.05);
+    }
+}
+@media (min-width: 1530px) and (min-height:850px){
+    .roomInfo{
+        flex-grow: 1;
+        background-color: #5F73B0;
+        border-top-left-radius: 60px;
+        border-top-right-radius: 60px;
+        width: 90%;
+        margin-top: 100px;
+        position: relative;
+    }
+    .room-profile{
+        position: absolute;
+        top : -10%;
+        right: 10%;
+        width: 500px;
+        height: 500px;
+    }
+
+    .myroom{
+        position: absolute;
+        top : 91px ; 
+        left: 157px;
+        width: 550px;
+        height: 300px;
+        /* border: #FF9900 solid 1px; */
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        .editpost{
+            border: 0;
+            background-color: white;
+            width: 144px;
+            height: 46px;
+            border-radius: 20px;
+        }
+        .roomName{
+            color: white;
+        }
+        .roomIntroduction{
+            color: white;
+            margin: 20px 0;
+        }
+    }
+    .ismyroom-container{
+        position: absolute;
+        bottom: 15%;
+        left: 157px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        /* margin: 20px 0; */
+        .sol{
+            background-color: white;
+            /* display: flex; */
+            width: 200px;
+            height: 81px;
+            padding-left: 10px;
+            border-radius: 20px;
+            margin-right: 20px;
+        }
+    }
+    .viewpost-btn{
+        position: absolute;
+        bottom: 15%;
+        right: 20%;
+        border: 0;
+        background-color: white;
+        width: 200px;
+        height: 81px;
+        border-radius: 20px;
+        &:hover {
+            animation: jelly 0.5s;
+        }
+    }
+}
+
+@media (max-width: 1530px) , (max-height : 850px) {
+    .roomInfo{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+    }
+    .myroom{
+        display: flex;
+        flex-direction: column;
+        /* border: #FF9900 solid 1px; */
+        .editpost{
+            border: 0;
+            background-color: white;
+            width: 144px;
+            height: 46px;
+            border-radius: 20px;
+        }
+        .roomName{
+            color: white;
+            margin: 0;
+        }
+        .roomIntroduction{
+            color: white;
+            margin: 20px 0;
+        }
+    }
+    .ismyroom-container{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 30px;
+        .sol{
+            background-color: white;
+            width: 200px;
+            height: 81px;
+            padding-left: 10px;
+            border-radius: 20px;
+            margin-right: 20px;
+        }
+    }
+    .viewpost-btn{
+        border: 0;
+        background-color: white;
+        width: 200px;
+        height: 81px;
+        border-radius: 20px;
+        &:hover {
+            animation: jelly 0.5s;
+        }
+    }
+    @media (max-width: 800px) {
+        .room-profile{
+        width: 300px;
+        height: 300px;
+        }
+        .myroom{
+            margin: 30px 30px;
+        }
+    }
+    @media (min-width: 800px) {
+        .room-profile{
+        width: 500px;
+        height: 500px;
+        }
+        .myroom{
+            margin: 30px 100px;
+        }
+    }
+}
