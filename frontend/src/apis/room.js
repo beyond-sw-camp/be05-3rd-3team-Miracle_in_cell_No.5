@@ -12,4 +12,4 @@ export default {
     putRoomById(roomId,data){
       return axios.put(`/room/${roomId}/edit`,data) ;
     }
-  };
+};
