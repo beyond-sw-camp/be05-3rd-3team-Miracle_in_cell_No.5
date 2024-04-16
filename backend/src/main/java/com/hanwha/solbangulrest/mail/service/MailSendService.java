@@ -10,7 +10,6 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
-import com.hanwha.solbangulrest.hanwhauser.domain.HanwhaUser;
 import com.hanwha.solbangulrest.hanwhauser.repository.HanwhaUserRepository;
 import com.hanwha.solbangulrest.mail.config.RedisUtil;
 import com.hanwha.solbangulrest.user.exception.MailCheckException;
@@ -47,11 +46,8 @@ public class MailSendService {
 	}
 
 	private void validateEmail(String email) {
-		HanwhaUser hanwhaUser = hanwhaUserRepository.findHanwhaUserByGitEmail(email)
-			.orElseThrow(() -> new MailCheckException("한화 SW교육 5기생만 가입 가능합니다."));
-
-		if (hanwhaUser.getIsMember() == null || hanwhaUser.getIsMember()) {
-			throw new MailCheckException("이미 가입된 이메일입니다.");
+		if (!hanwhaUserRepository.existsByGitEmail(email)) {
+			throw new MailCheckException("한화 SW교육 5기생만 가입 가능합니다.");
 		}
 	}
 

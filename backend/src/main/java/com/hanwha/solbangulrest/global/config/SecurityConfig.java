@@ -1,4 +1,4 @@
-package com.hanwha.solbangulrest.config;
+package com.hanwha.solbangulrest.global.config;
 
 import java.util.Collections;
 

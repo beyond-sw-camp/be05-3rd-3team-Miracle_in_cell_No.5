@@ -1,4 +1,4 @@
-package com.hanwha.solbangulrest.config;
+package com.hanwha.solbangulrest.global.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;

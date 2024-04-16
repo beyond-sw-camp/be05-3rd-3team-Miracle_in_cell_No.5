@@ -8,6 +8,7 @@ import com.hanwha.solbangulrest.file.FileStore;
 import com.hanwha.solbangulrest.file.UploadFile;
 import com.hanwha.solbangulrest.hanwhauser.domain.HanwhaUser;
 import com.hanwha.solbangulrest.hanwhauser.repository.HanwhaUserRepository;
+import com.hanwha.solbangulrest.mail.dto.EmailRequestDto;
 import com.hanwha.solbangulrest.room.domain.Room;
 import com.hanwha.solbangulrest.user.domain.User;
 import com.hanwha.solbangulrest.user.dto.JoinUserDto;
@@ -61,7 +62,7 @@ public class JoinService {
 			throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
 		}
 
-		if (userRepository.existsByLoginId(joinUserDto.getLoginId())) {
+		if (isExistsByLoginId(joinUserDto)) {
 			throw new IllegalArgumentException("이미 존재하는 아이디입니다.");
 		}
 
@@ -90,12 +91,20 @@ public class JoinService {
 			.introduction("안녕하세요! " + user.getNickname() + "의 방입니다.")
 			.build();
 	}
-	
+
 	public void passwordReset(String gitEmail, PasswordResetDto passwordResetDto) {
 		User user = userRepository.findByGitEmail(gitEmail)
 			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
 		String encodePassword = passwordEncoder.encode(passwordResetDto.getResetPassword());
 		user.updatePassword(encodePassword);
+	}
+
+	public Boolean isExistsByLoginId(JoinUserDto joinUserDto) {
+		return userRepository.existsByLoginId(joinUserDto.getLoginId());
+	}
+
+	public boolean isMember(EmailRequestDto emailRequestDto) {
+		return hanwhaUserRepository.isMemberByGitEmail(emailRequestDto.getEmail());
 	}
 }
 
