@@ -83,15 +83,15 @@ class CommentServiceTest {
 	void save() throws Exception {
 		// given
 		Result result = getUserIdAndRoomId();
-		Long userId = result.userId();
+		String loginId = result.loginId();
 		Long roomId = result.roomId();
 
-		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(userId, roomId, Category.CLAIMS);
+		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(loginId, roomId, Category.CLAIMS);
 		Long postId = postService.save(postSaveRequestDto);
 
 		CommentSaveDto commentSaveDto = CommentSaveDto.builder()
 			.postId(postId)
-			.userId(userId)
+			.loginId(loginId)
 			.content("test")
 			.build();
 
@@ -115,15 +115,15 @@ class CommentServiceTest {
 	void delete() throws Exception {
 		// given
 		Result result = getUserIdAndRoomId();
-		Long userId = result.userId();
+		String loginId = result.loginId();
 		Long roomId = result.roomId();
 
-		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(userId, roomId, Category.CLAIMS);
+		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(loginId, roomId, Category.CLAIMS);
 		Long postId = postService.save(postSaveRequestDto);
 
 		CommentSaveDto commentSaveDto = CommentSaveDto.builder()
 			.postId(postId)
-			.userId(userId)
+			.loginId(loginId)
 			.content("test")
 			.build();
 
@@ -140,9 +140,9 @@ class CommentServiceTest {
 		assertThat(commentService.findByPostId(postId).size()).isEqualTo(2);
 	}
 
-	private static PostSaveRequestDto getPostSaveRequestDto(Long userId, Long roomId, Category category) {
+	private static PostSaveRequestDto getPostSaveRequestDto(String loginId, Long roomId, Category category) {
 		return PostSaveRequestDto.builder()
-			.userId(userId)
+			.loginId(loginId)
 			.roomId(roomId)
 			.title("title")
 			.content("content")
@@ -153,12 +153,12 @@ class CommentServiceTest {
 
 	private Result getUserIdAndRoomId() {
 		List<User> users = userRepository.findAll();
-		Long userId = users.get(0).getId();
+		String loginId = users.get(0).getLoginId();
 		Long roomId = users.get(1).getRoom().getId();
-		return new Result(userId, roomId);
+		return new Result(loginId, roomId);
 	}
 
-	private record Result(Long userId, Long roomId) {
+	private record Result(String loginId, Long roomId) {
 	}
 
 }

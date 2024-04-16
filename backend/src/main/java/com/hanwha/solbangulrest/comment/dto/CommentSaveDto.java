@@ -13,7 +13,7 @@ import lombok.Setter;
 public class CommentSaveDto {
 
 	private Long postId;
-	private Long userId;
+	private String loginId;
 	private String content;
 
 	public Comment toEntity(Post post, User author) {
@@ -25,9 +25,9 @@ public class CommentSaveDto {
 	}
 
 	@Builder
-	public CommentSaveDto(Long postId, Long userId, String content) {
+	public CommentSaveDto(Long postId, String loginId, String content) {
 		this.postId = postId;
-		this.userId = userId;
+		this.loginId = loginId;
 		this.content = content;
 	}
 }

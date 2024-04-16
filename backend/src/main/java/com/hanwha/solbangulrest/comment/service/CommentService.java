@@ -28,12 +28,12 @@ public class CommentService {
 	@Transactional
 	public Long save(CommentSaveDto commentSaveDto) {
 		Long postId = commentSaveDto.getPostId();
-		Long userId = commentSaveDto.getUserId();
+		String loginId = commentSaveDto.getLoginId();
 
 		Post post = postRepository.findById(postId).orElseThrow(
 			() -> new IllegalArgumentException("해당 post가 없습니다. id=" + postId));
-		User author = userRepository.findById(userId).orElseThrow(
-			() -> new IllegalArgumentException("해당 user가 없습니다. id=" + userId));
+		User author = userRepository.findByLoginId(loginId).orElseThrow(
+			() -> new IllegalArgumentException("해당 user가 없습니다. id=" + loginId));
 
 		Comment comment = commentSaveDto.toEntity(post, author);
 		post.addComment(comment);

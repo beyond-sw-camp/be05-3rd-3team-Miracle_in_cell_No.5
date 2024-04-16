@@ -89,10 +89,10 @@ class RoomServiceTest {
 	@DisplayName("방에 게시글 삭제된 경우 방이 가지고 있는 게시글 수가 감소한다.")
 	void deletePost() {
 		Result result = getUserIdAndRoomId();
-		Long userId = result.userId();
+		String loginId = result.loginId();
 		Long roomId = result.roomId();
 
-		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(userId, roomId, Category.CLAIMS);
+		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(loginId, roomId, Category.CLAIMS);
 		postService.save(postSaveRequestDto);
 		postService.save(postSaveRequestDto);
 		postService.save(postSaveRequestDto);
@@ -106,9 +106,9 @@ class RoomServiceTest {
 		assertThat(roomService.findPostsByRoomId(roomId).size()).isEqualTo(4);
 	}
 
-	private static PostSaveRequestDto getPostSaveRequestDto(Long userId, Long roomId, Category category) {
+	private static PostSaveRequestDto getPostSaveRequestDto(String loginId, Long roomId, Category category) {
 		return PostSaveRequestDto.builder()
-			.userId(userId)
+			.loginId(loginId)
 			.roomId(roomId)
 			.title("title")
 			.content("content")
@@ -119,11 +119,11 @@ class RoomServiceTest {
 
 	private Result getUserIdAndRoomId() {
 		List<User> users = userRepository.findAll();
-		Long userId = users.get(0).getId();
+		String loginId = users.get(0).getLoginId();
 		Long roomId = users.get(1).getRoom().getId();
-		return new Result(userId, roomId);
+		return new Result(loginId, roomId);
 	}
 
-	private record Result(Long userId, Long roomId) {
+	private record Result(String loginId, Long roomId) {
 	}
 }
