@@ -30,7 +30,7 @@ spring:
       port: 6379
 
 file:
-  dir: /Users/chaewon/image/
+  dir: /Users/sangcheol/image/
 
 logging.level:
   org.hibernate.SQL: debug

@@ -3,7 +3,6 @@ package com.hanwha.solbangulrest.user.controller;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
-import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,11 +30,6 @@ public class JoinController {
 
 	private final JoinService joinService;
 	private final MailSendService mailService;
-
-	@ExceptionHandler
-	public Result<Void> mailCheckExceptionHandler(MailCheckException e) {
-		return new Result<>(false, e.getMessage(), null);
-	}
 
 	@PostMapping
 	public Result<Void> join(@RequestBody @Valid JoinUserDto joinUserDto,
@@ -69,6 +63,9 @@ public class JoinController {
 	@PostMapping("/mail/send/password-reset")
 	public Result<Void> sendMailForPasswordReset(@RequestBody @Valid EmailRequestDto emailRequestDto) {
 		log.info("비밀번호 변경을 위한 메일 전송={}", emailRequestDto.getEmail());
+		if (!joinService.isMember(emailRequestDto)) {
+			throw new MailCheckException("가입되지 않은 이메일입니다.");
+		}
 		mailService.sendEmail(emailRequestDto.getEmail());
 
 		return new Result<>(true, "메일 전송에 성공했습니다.", null);

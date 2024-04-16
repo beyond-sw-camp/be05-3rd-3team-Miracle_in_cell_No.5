@@ -86,10 +86,10 @@ class PostServiceTest {
 	void save() throws Exception {
 		// given
 		Result result = getUserIdAndRoomId();
-		Long userId = result.userId();
+		String loginId = result.loginId();
 		Long roomId = result.roomId();
 
-		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(userId, roomId, Category.COMPLIMENT);
+		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(loginId, roomId, Category.COMPLIMENT);
 
 		// when
 		postService.save(postSaveRequestDto); // author + 1, roomUser + 3
@@ -115,10 +115,10 @@ class PostServiceTest {
 	void existLastPost() throws Exception {
 		// given
 		Result result = getUserIdAndRoomId();
-		Long userId = result.userId();
+		String loginId = result.loginId();
 		Long roomId = result.roomId();
 
-		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(userId, roomId, Category.FREE);
+		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(loginId, roomId, Category.FREE);
 
 		// when
 		postService.save(postSaveRequestDto); // author + 1
@@ -140,10 +140,10 @@ class PostServiceTest {
 	void existLastPostAndAnotherCategory() throws Exception {
 		// given
 		Result result = getUserIdAndRoomId();
-		Long userId = result.userId();
+		String loginId = result.loginId();
 		Long roomId = result.roomId();
 
-		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(userId, roomId, Category.COMPLIMENT);
+		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(loginId, roomId, Category.COMPLIMENT);
 
 		// when
 		postService.save(postSaveRequestDto); // author + 1, roomUser + 3
@@ -167,10 +167,10 @@ class PostServiceTest {
 	void update() throws Exception {
 		// given
 		Result result = getUserIdAndRoomId();
-		Long userId = result.userId();
+		String loginId = result.loginId();
 		Long roomId = result.roomId();
 
-		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(userId, roomId, Category.COMPLIMENT);
+		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(loginId, roomId, Category.COMPLIMENT);
 
 		// when
 		postService.save(postSaveRequestDto);
@@ -181,7 +181,6 @@ class PostServiceTest {
 		PostUpdateDto postUpdateDto = PostUpdateDto.builder()
 			.title("update title")
 			.content("update content")
-			.category(Category.CLAIMS)
 			.anonymousYn(false)
 			.build();
 		postService.update(post.getId(), postUpdateDto);
@@ -190,7 +189,6 @@ class PostServiceTest {
 		// then
 		assertThat(postResponseDto.getTitle()).isEqualTo("update title");
 		assertThat(postResponseDto.getContent()).isEqualTo("update content");
-		assertThat(postResponseDto.getCategory()).isEqualTo(Category.CLAIMS);
 		assertThat(postResponseDto.getAnonymousYn()).isFalse();
 	}
 
@@ -199,10 +197,10 @@ class PostServiceTest {
 	void delete() throws Exception {
 		// given
 		Result result = getUserIdAndRoomId();
-		Long userId = result.userId();
+		String loginId = result.loginId();
 		Long roomId = result.roomId();
 
-		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(userId, roomId, Category.COMPLIMENT);
+		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(loginId, roomId, Category.COMPLIMENT);
 
 		// when
 		postService.save(postSaveRequestDto);
@@ -223,15 +221,15 @@ class PostServiceTest {
 	void search() throws Exception {
 		// given
 		Result result = getUserIdAndRoomId();
-		Long userId = result.userId();
+		String loginId = result.loginId();
 		Long roomId = result.roomId();
 
-		PostSaveRequestDto postSaveRequestDto1 = getPostSaveRequestDto(userId, roomId, Category.COMPLIMENT,
+		PostSaveRequestDto postSaveRequestDto1 = getPostSaveRequestDto(loginId, roomId, Category.COMPLIMENT,
 			"유저1을 칭찬합니다.",
 			"compliment content");
-		PostSaveRequestDto postSaveRequestDto2 = getPostSaveRequestDto(userId, roomId, Category.CLAIMS,
+		PostSaveRequestDto postSaveRequestDto2 = getPostSaveRequestDto(loginId, roomId, Category.CLAIMS,
 			"claims", "claims content");
-		PostSaveRequestDto postSaveRequestDto3 = getPostSaveRequestDto(userId, roomId, Category.FREE,
+		PostSaveRequestDto postSaveRequestDto3 = getPostSaveRequestDto(loginId, roomId, Category.FREE,
 			"free", "free content");
 
 		// when
@@ -243,10 +241,7 @@ class PostServiceTest {
 
 		// then
 		PageRequest pageable = PageRequest.of(0, 10);
-		Page<PostResponseDto> postPage = postService.search("",
-			Category.COMPLIMENT.toString(),
-			roomId,
-			pageable);
+		Page<PostResponseDto> postPage = postService.search("", Category.COMPLIMENT.toString(), roomId, pageable);
 
 		List<PostResponseDto> posts = postPage.getContent();
 		assertThat(posts.size()).isEqualTo(10);
@@ -259,10 +254,10 @@ class PostServiceTest {
 	void viewCount() throws Exception {
 		// given
 		Result result = getUserIdAndRoomId();
-		Long userId = result.userId();
+		String loginId = result.loginId();
 		Long roomId = result.roomId();
 
-		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(userId, roomId, Category.COMPLIMENT);
+		PostSaveRequestDto postSaveRequestDto = getPostSaveRequestDto(loginId, roomId, Category.COMPLIMENT);
 		postService.save(postSaveRequestDto);
 
 		// when
@@ -276,9 +271,9 @@ class PostServiceTest {
 		assertThat(post.getViewCount()).isEqualTo(2);
 	}
 
-	private static PostSaveRequestDto getPostSaveRequestDto(Long userId, Long roomId, Category category) {
+	private static PostSaveRequestDto getPostSaveRequestDto(String loginId, Long roomId, Category category) {
 		return PostSaveRequestDto.builder()
-			.userId(userId)
+			.loginId(loginId)
 			.roomId(roomId)
 			.title("title")
 			.content("content")
@@ -287,10 +282,10 @@ class PostServiceTest {
 			.build();
 	}
 
-	private static PostSaveRequestDto getPostSaveRequestDto(Long userId, Long roomId, Category category, String title,
-		String content) {
+	private static PostSaveRequestDto getPostSaveRequestDto(String loginId, Long roomId, Category category,
+		String title, String content) {
 		return PostSaveRequestDto.builder()
-			.userId(userId)
+			.loginId(loginId)
 			.roomId(roomId)
 			.title(title)
 			.content(content)
@@ -301,11 +296,11 @@ class PostServiceTest {
 
 	private Result getUserIdAndRoomId() {
 		List<User> users = userRepository.findAll();
-		Long userId = users.get(0).getId();
+		String loginId = users.get(0).getLoginId();
 		Long roomId = users.get(1).getRoom().getId();
-		return new Result(userId, roomId);
+		return new Result(loginId, roomId);
 	}
 
-	private record Result(Long userId, Long roomId) {
+	private record Result(String loginId, Long roomId) {
 	}
 }
