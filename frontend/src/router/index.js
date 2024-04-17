@@ -4,6 +4,7 @@ import Room  from '../page/RoomPage.vue' ;
 import ViewRoom  from '../page/ViewRoom.vue' ; 
 import ViewRooms  from '../page/ViewRooms.vue' ; 
 import EditRoom  from '../page/EditRoom.vue' ; 
+import Speaker from '../page/SpeakerReservation.vue' ;
 
 const router = createRouter({
     history: createWebHistory(),
@@ -16,6 +17,10 @@ const router = createRouter({
                     path: "",
                     component : ViewRooms,
                 },
+                {
+                    path : "speaker",
+                    component : Speaker
+                }
             ]
         },
         {
