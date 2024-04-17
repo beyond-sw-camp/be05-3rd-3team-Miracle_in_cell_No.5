@@ -5,6 +5,8 @@ import ViewRoom  from '../page/ViewRoom.vue' ;
 import ViewRooms  from '../page/ViewRooms.vue' ; 
 import EditRoom  from '../page/EditRoom.vue' ; 
 import Speaker from '../page/SpeakerReservation.vue' ;
+import SubmitPost from '../page/SubmitPost.vue';
+import ViewPosts from '../page/ViewPosts.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -34,6 +36,14 @@ const router = createRouter({
                 {
                     path : "editroom",
                     component : EditRoom,
+                },
+                {
+                    path:"submitpost",
+                    component: SubmitPost,
+                },
+                {
+                    path:"viewposts",
+                    component: ViewPosts,
                 },
             ]
         },
