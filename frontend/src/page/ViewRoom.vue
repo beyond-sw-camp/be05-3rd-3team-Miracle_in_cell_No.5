@@ -5,24 +5,24 @@
         <div class='myroom'>
           <h1 class='roomName'>{{room&&room.roomName}}</h1>
           <div class='roomIntroduction'>{{room&&room.introduction}}</div>
-          <div class='ismyroom'>
-            <router-link :to="`/room/${roomId}/editroom`"><button class='editpost'>수정하기</button></router-link>
+          <div class='ismyroom' v-if="isUserRoom()">
+            <router-link :to="`/room/${roomId}/editroom`"><button class='edit-btn'>수정하기</button></router-link>
           </div>
         </div>
 
         <div class='ismyroom-container'>
-          <div class='sol ismyroom'>
+          <div class='sol ismyroom' v-if="isUserRoom()">
             <img src="/img/sol.png" class="sol-img"/><strong>
             <span>솔방울 개수</span></strong>
           </div>
-          <div class='write-con isnotmyroom'>
+          <div class='write-con isnotmyroom' v-if="!isUserRoom()">
             <!-- <a><button class='write-btn'>글쓰기</button></a> -->
-            <router-link :to="`/room/${roomId}/submitpost`"><button class="writepost">글쓰기</button></router-link>
+            <router-link :to="`/room/${roomId}/submitpost`"><button class="write-btn">글쓰기</button></router-link>
           </div>
         </div>
         
         <!-- <a><button class='viewpost-btn'>글 더보기...</button></a> -->
-        <router-link :to="`/room/${roomId}/viewposts`"><button class="viewposts">글 더보기...</button></router-link>
+        <router-link :to="`/room/${roomId}/viewposts`"><button class="viewpost-btn">글 더보기...</button></router-link>
       </div>
     </div>
 </template>
@@ -31,6 +31,7 @@
 import { useRoute } from 'vue-router';
 // import axios from 'axios';
 import myRoomsApi from '@/apis/room' ;
+import myUsersApi from '@/apis/user' ;
 import { ref } from 'vue';
 import '@/css/ViewRoom.css';
 export default {
@@ -39,6 +40,11 @@ export default {
     let roomId = route.params.id ;
     console.log("room view",roomId) ;
     const room = ref({}) ;
+    const user = ref({}) ;
+
+    const isUserRoom = () => {
+      return roomId == user.value.roomId ;
+    }
 
     const getRoom = async () => {
       try {
@@ -47,14 +53,26 @@ export default {
         console.log(response.data.data) ;
         room.value = response.data.data ;
       } catch (error) {
-          console.error("Error fetching scraps:", error);
+          console.error("Error ViewRoom getRoom : ", error);
       }
     }
     getRoom() ;
 
+    const getUser = async () =>{
+      try{
+        const response = await myUsersApi.getLoginUserProfile() ;
+        console.log(response.data.data) ;
+        user.value = response.data.data ;
+      }catch(error){
+        console.error("Error ViewRoom getUser : ", error);
+      }
+    }
+    getUser() ;
+
     return {
       room,
-      roomId
+      roomId,
+      isUserRoom,
     }
   }
 }
