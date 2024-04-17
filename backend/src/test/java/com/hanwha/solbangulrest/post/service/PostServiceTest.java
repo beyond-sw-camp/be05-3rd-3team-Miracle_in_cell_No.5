@@ -94,7 +94,7 @@ class PostServiceTest {
 		// when
 		postService.save(postSaveRequestDto); // author + 1, roomUser + 3
 
-		List<Post> posts = postService.findAll();
+		List<Post> posts = postService.findAllForTest();
 		Post post = posts.get(0);
 		User author = post.getAuthor();
 		User roomUser = post.getRoom().getUser();
@@ -124,7 +124,7 @@ class PostServiceTest {
 		postService.save(postSaveRequestDto); // author + 1
 		postService.save(postSaveRequestDto);
 
-		List<Post> posts = postService.findAll();
+		List<Post> posts = postService.findAllForTest();
 		Post post = posts.get(0);
 
 		User author = post.getAuthor();
@@ -151,7 +151,7 @@ class PostServiceTest {
 		postSaveRequestDto.setCategory(Category.CLAIMS);
 		postService.save(postSaveRequestDto); // author + 1
 
-		List<Post> posts = postService.findAll();
+		List<Post> posts = postService.findAllForTest();
 		Post post = posts.get(0);
 
 		User author = post.getAuthor();
@@ -175,7 +175,7 @@ class PostServiceTest {
 		// when
 		postService.save(postSaveRequestDto);
 
-		List<Post> posts = postService.findAll();
+		List<Post> posts = postService.findAllForTest();
 		Post post = posts.get(0);
 
 		PostUpdateDto postUpdateDto = PostUpdateDto.builder()
@@ -206,14 +206,14 @@ class PostServiceTest {
 		postService.save(postSaveRequestDto);
 		postService.save(postSaveRequestDto);
 		postService.save(postSaveRequestDto);
-		assertThat(postService.findAll().size()).isEqualTo(3);
+		assertThat(postService.findAllForTest().size()).isEqualTo(3);
 
-		List<Post> posts = postService.findAll();
+		List<Post> posts = postService.findAllForTest();
 		Post post = posts.get(0);
 		postService.delete(post.getId());
 
 		// then
-		assertThat(postService.findAll().size()).isEqualTo(2);
+		assertThat(postService.findAllForTest().size()).isEqualTo(2);
 	}
 
 	@Test
@@ -225,8 +225,7 @@ class PostServiceTest {
 		Long roomId = result.roomId();
 
 		PostSaveRequestDto postSaveRequestDto1 = getPostSaveRequestDto(loginId, roomId, Category.COMPLIMENT,
-			"유저1을 칭찬합니다.",
-			"compliment content");
+			"유저1을 칭찬합니다.", "compliment content");
 		PostSaveRequestDto postSaveRequestDto2 = getPostSaveRequestDto(loginId, roomId, Category.CLAIMS,
 			"claims", "claims content");
 		PostSaveRequestDto postSaveRequestDto3 = getPostSaveRequestDto(loginId, roomId, Category.FREE,
@@ -261,7 +260,7 @@ class PostServiceTest {
 		postService.save(postSaveRequestDto);
 
 		// when
-		List<Post> posts = postService.findAll();
+		List<Post> posts = postService.findAllForTest();
 		Post post = posts.get(0);
 		assertThat(post.getViewCount()).isEqualTo(0);
 

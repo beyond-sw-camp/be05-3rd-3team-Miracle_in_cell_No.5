@@ -7,29 +7,21 @@ import jakarta.validation.constraints.NotBlank;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import com.hanwha.solbangulrest.speaker.domain.Speaker;
-
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
+@ToString
 @Getter
 @Setter
-public class SpeakerDto {
+public class SpeakerRequestDto {
 
-	@NotBlank(message = "내용을 입력해주세요")
+	@NotBlank
 	private String content;
 
-	@NotBlank(message = "날짜를 입력해주세요")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate reservationDate;
 
-	@NotBlank(message = "시간을 입력해주세요")
 	@DateTimeFormat(pattern = "HH:mm")
 	private LocalTime reservationTime;
-
-	public SpeakerDto(Speaker speaker) {
-		this.reservationDate = speaker.getStartTime().toLocalDate();
-		this.reservationTime = speaker.getStartTime().toLocalTime();
-		this.content = speaker.getContent();
-	}
 }
