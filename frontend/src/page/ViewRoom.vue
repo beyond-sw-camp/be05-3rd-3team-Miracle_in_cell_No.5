@@ -42,8 +42,8 @@ export default {
       try {
         console.log(roomId);
         const response = await myRoomsApi.getRoomById(roomId);
-        console.log(response.data) ;
-        room.value = response.data ;
+        console.log(response.data.data) ;
+        room.value = response.data.data ;
       } catch (error) {
           console.error("Error fetching scraps:", error);
       }

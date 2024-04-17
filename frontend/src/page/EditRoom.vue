@@ -42,8 +42,8 @@ export default {
         const getRoom = async () =>{
             try{
                 const response = await myRoomsApi.getRoomById(roomId) ;
-                console.log("edit room getRoom res ," ,response.data) ;
-                room.value = { ...response.data };  
+                console.log("edit room getRoom res ," ,response.data.data) ;
+                room.value = { ...response.data.data };  
             }catch(e){
                 console.log("edit room getRoom error, ",e) ;
             }
@@ -56,8 +56,8 @@ export default {
                     roomName : room.value.roomName,
                     introduction : room.value.introduction 
                 }) ;
-                console.log("edit room putRoom res ," ,response.data) ;
-                room.value= response.data ;
+                console.log("edit room putRoom res ," ,response.data.data) ;
+                room.value= response.data.data ;
                 router.go(-1) ;
             }catch(e){
                 console.log("edit room putRoom error, ",e)
