@@ -5,37 +5,35 @@ import ViewRoom  from '../page/ViewRoom.vue' ;
 import ViewRooms  from '../page/ViewRooms.vue' ; 
 import EditRoom  from '../page/EditRoom.vue' ; 
 import Speaker from '../page/SpeakerReservation.vue' ;
-import SubmitPost from '../page/SubmitPost.vue';
-import ViewPosts from '../page/ViewPosts.vue';
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
             path: "/",
-            component : Main,
-            children : [
+            component: Main,
+            children: [
                 {
                     path: "",
-                    component : ViewRooms,
+                    component: ViewRooms,
                 },
                 {
-                    path : "speaker",
-                    component : Speaker
+                    path: "speaker",
+                    component: Speaker
                 }
             ]
         },
         {
-            path : "/room/:id/",
-            component : Room,
-            children : [
+            path: "/room/:id/",
+            component: Room,
+            children: [
                 {
-                    path : "",
-                    component : ViewRoom,
+                    path: "",
+                    component: ViewRoom,
                 },
                 {
-                    path : "editroom",
-                    component : EditRoom,
+                    path: "editroom",
+                    component: EditRoom,
                 },
                 {
                     path:"submitpost",
@@ -47,7 +45,11 @@ const router = createRouter({
                 },
             ]
         },
+        {
+            path: "/login",
+            component: LoginPage,
+        },
     ],
 });
 
-export default router ;
+export default router;
