@@ -94,9 +94,9 @@ public class PostService {
 		spec = spec.and(PostSpecification.findByRoomId(roomId));
 
 		spec = switch (category) {
-			case "compliment" -> spec.and(PostSpecification.findByCategory(Category.COMPLIMENT));
-			case "claims" -> spec.and(PostSpecification.findByCategory(Category.CLAIMS));
-			case "free" -> spec.and(PostSpecification.findByCategory(Category.FREE));
+			case "COMPLEMENT" -> spec.and(PostSpecification.findByCategory(Category.COMPLIMENT));
+			case "CLAIMS" -> spec.and(PostSpecification.findByCategory(Category.CLAIMS));
+			case "FREE" -> spec.and(PostSpecification.findByCategory(Category.FREE));
 			default -> spec;
 		};
 
@@ -110,9 +110,8 @@ public class PostService {
 		return posts.map(PostResponseDto::new);
 	}
 
-	public List<Post> findAll() {
-		List<Post> posts = postRepository.findAll();
-		return posts;
+	public List<Post> findAllForTest() {
+		return postRepository.findAll();
 	}
 
 	public Page<PostResponseDto> findAll(Pageable pageable) {

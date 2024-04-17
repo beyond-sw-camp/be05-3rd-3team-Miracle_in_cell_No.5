@@ -49,15 +49,6 @@ public class RoomController {
 		return new Result<>(true, "방 정보 수정 완료", null);
 	}
 
-	@GetMapping("/{roomId}/posts")
-	public Result<Page<PostResponseDto>> viewPosts(@PathVariable Long roomId,
-		@RequestParam(value = "keyword", defaultValue = "") String keyword,
-		@PageableDefault(size = 10, sort = "createdDateTime", direction = Sort.Direction.DESC) Pageable pageable) {
-
-		Page<PostResponseDto> posts = postService.findPostsByRoomId(roomId, pageable);
-		return new Result<>(true, "방 글 목록 조회", posts);
-	}
-
 	@GetMapping("/{roomId}/search")
 	public Result<Page<PostResponseDto>> searchPosts(@PathVariable Long roomId,
 		@RequestParam(value = "keyword", defaultValue = "") String keyword,
