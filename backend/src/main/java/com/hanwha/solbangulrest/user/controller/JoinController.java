@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttribute;
 
@@ -46,6 +47,12 @@ public class JoinController {
 		joinService.join(joinUserDto);
 
 		session.removeAttribute("email");
+		return new Result<>(true, "회원가입이 완료되었습니다.", null);
+	}
+
+	@PostMapping("/test")
+	public Result<Void> testJoin(@RequestParam Integer i) {
+		joinService.testJoin(i);
 		return new Result<>(true, "회원가입이 완료되었습니다.", null);
 	}
 

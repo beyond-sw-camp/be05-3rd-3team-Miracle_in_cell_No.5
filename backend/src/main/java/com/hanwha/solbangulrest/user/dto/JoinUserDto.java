@@ -28,7 +28,7 @@ public class JoinUserDto {
 
 	@NotBlank(message = "비밀번호 확인을 입력해주세요")
 	private String passwordConfirm;
-	
+
 	private String username;
 
 	@NotBlank(message = "닉네임을 입력해주세요")
@@ -65,6 +65,17 @@ public class JoinUserDto {
 			.hanwhaUser(hanwhaUser)
 			.nickname(nickname)
 			.profileImage(profileImage)
+			.role(Role.ROLE_USER)
+			.build();
+	}
+
+	public User toEntityTest(HanwhaUser hanwhaUser) {
+		return User.builder()
+			.loginId(loginId)
+			.password(password)
+			.nickname(nickname)
+			.profileImage(profileImage)
+			.hanwhaUser(hanwhaUser)
 			.role(Role.ROLE_USER)
 			.build();
 	}

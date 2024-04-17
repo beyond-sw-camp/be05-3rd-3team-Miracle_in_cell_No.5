@@ -28,6 +28,29 @@ public class JoinService {
 	private final FileStore fileStore;
 
 	@Transactional
+	public void testJoin(Integer i) {
+		HanwhaUser hanwhaUser = hanwhaUserRepository.findById(Long.valueOf(i)).get();
+		JoinUserDto joinUserDto = JoinUserDto.builder()
+			.loginId("test" + i)
+			.password("test" + i)
+			.passwordConfirm("test")
+			.nickname("test" + i)
+			.gitEmail("test" + i + "@test.com")
+			.multipartFile(null)
+			.profileImage("default.png")
+			.build();
+		setEncodePassword(joinUserDto);
+
+		User user = joinUserDto.toEntityTest(hanwhaUser);
+		Room room = createRoom(user);
+
+		hanwhaUser.createAccount();
+		user.addRoom(room);
+
+		userRepository.save(user);
+	}
+
+	@Transactional
 	public Long join(JoinUserDto joinUserDto) {
 		validateJoinUser(joinUserDto);
 
