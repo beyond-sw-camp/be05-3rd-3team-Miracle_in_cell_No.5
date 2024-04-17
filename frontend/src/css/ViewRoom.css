@@ -20,7 +20,7 @@
    
 }
 
-.write-btn{
+.write-btn {
     border: 0;
     background-color: white;
     width: 200px;
@@ -72,7 +72,7 @@
         display: flex;
         justify-content: center;
         flex-direction: column;
-        .editpost{
+        .edit-btn{
             border: 0;
             background-color: white;
             width: 144px;
@@ -132,7 +132,7 @@
         display: flex;
         flex-direction: column;
         /* border: #FF9900 solid 1px; */
-        .editpost{
+        .edit-btn{
             border: 0;
             background-color: white;
             width: 144px;

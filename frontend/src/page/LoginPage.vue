@@ -16,7 +16,7 @@
 
 <script>
 import loginApi from '@/apis/login';
-import {ref} from "vue";
+import { ref} from "vue";
 import {useRouter} from "vue-router";
 
 export default {
@@ -40,6 +40,7 @@ export default {
         console.log("edit room putRoom error, ", e)
       }
     }
+
     return {
       username,
       password,

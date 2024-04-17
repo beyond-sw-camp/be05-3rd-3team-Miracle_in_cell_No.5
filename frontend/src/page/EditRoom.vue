@@ -24,10 +24,6 @@
 import myRoomsApi from '@/apis/room' ;
 import { ref } from 'vue';
 import { useRoute, useRouter } from 'vue-router';
-// import Vue from 'vue';
-
-// import { BFormInput } from 'bootstrap-vue'
-// Vue.component('b-form-input', BFormInput)
 
 export default {
     setup(){

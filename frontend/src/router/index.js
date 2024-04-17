@@ -1,21 +1,25 @@
-import {createRouter, createWebHistory} from 'vue-router';
-import Main from '../page/MainPage.vue';
-import Room from '../page/RoomPage.vue';
-import ViewRoom from '../page/ViewRoom.vue';
-import ViewRooms from '../page/ViewRooms.vue';
-import EditRoom from '../page/EditRoom.vue';
-import Speaker from '../page/SpeakerReservation.vue';
+import { createRouter ,createWebHistory } from 'vue-router' ;
+import Main  from '../page/MainPage.vue' ;
+import Room  from '../page/RoomPage.vue' ;
+import ViewRoom  from '../page/ViewRoom.vue' ;
+import ViewRooms  from '../page/ViewRooms.vue' ;
+import EditRoom  from '../page/EditRoom.vue' ;
+import Speaker from '../page/SpeakerReservation.vue' ;
 import SubmitPost from '../page/SubmitPost.vue';
-import ViewPosts from '../page/ViewPosts.vue';
 import LoginPage from '../page/LoginPage.vue';
+import MainLayout from '@/layout/MainLayout.vue';
+import ArrowLayout from '@/layout/ArrowLayout.vue';
+import ViewPosts from '@/page/ViewPosts.vue';
+
 
 const router = createRouter({
     history: createWebHistory(),
     routes: [
         {
             path: "/",
-            component: Main,
-            children: [
+            component : Main,
+            meta : {layout : MainLayout },
+            children : [
                 {
                     path: "",
                     component: ViewRooms,
@@ -29,6 +33,7 @@ const router = createRouter({
         {
             path: "/room/:id/",
             component: Room,
+            meta : {layout : ArrowLayout },
             children: [
                 {
                     path: "",
@@ -43,7 +48,7 @@ const router = createRouter({
                     component: SubmitPost,
                 },
                 {
-                    path: "viewposts",
+                    path:"viewposts",
                     component: ViewPosts,
                 },
             ]
