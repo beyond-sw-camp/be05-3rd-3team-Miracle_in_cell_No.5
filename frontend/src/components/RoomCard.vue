@@ -3,7 +3,7 @@
       <div class="card">
         <div class="content">
           <div class="img"><img src="img/base.png"></div>
-          <div class="cardContent">
+          <div class="cardcontent">
             <h3>{{ truncate(room.roomName, 11) }}<br><span>{{ truncate(room.introduction, 15) }}</span></h3>
           </div>
         </div>

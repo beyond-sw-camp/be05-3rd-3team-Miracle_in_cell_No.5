@@ -10,6 +10,7 @@
     width: 50px;
     height: 50px;
     margin-right: 300px;
+    cursor: pointer; /* 여기서 커서 모양을 변경합니다 */
 }
 .nav{
     display: flex;

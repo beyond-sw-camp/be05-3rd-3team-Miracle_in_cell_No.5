@@ -44,21 +44,18 @@
     object-fit: cover;
   }
   
-  .cardContent h3 {
+  .cardcontent h3 {
     color: rgb(0, 0, 0);
-    text-transform: uppercase;
     letter-spacing: 2px;
-    font-weight: 500;
+    /* font-weight: 500; */
     font-size: 18px;
     text-align: center;
     margin: 20px 0 10px;
     line-height: 1.1em;
   }
   
-  .cardContent h3 span {
+  .cardcontent h3 span {
     font-size: 12px;
-    font-weight: 300;
-    text-transform: initial;
   }
   
   .sci {

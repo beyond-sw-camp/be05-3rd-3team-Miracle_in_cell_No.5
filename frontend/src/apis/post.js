@@ -12,5 +12,8 @@ export default {
     },
     getPostById(postId){
         return axios.get(`/posts/${postId}`,data) ;
+    },
+    getPostsByRoomId(roomId,keyword,category){
+        return axios.get(`/room/${roomId}/search`,keyword,category);
     }
 };
