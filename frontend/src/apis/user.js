@@ -1,18 +1,44 @@
-import axios from './config' ;
+import axios from './config';
+
 export default {
     getLoginUserProfile() {
-      return axios.get(`/users/profile`);
+        return axios.get(`/users/profile`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        });
     },
     patchProfile(data) {
-      return axios.patch(`/users/profile/nickname`,data);
+        return axios.patch(`/users/profile/nickname`, data, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        });
     },
     patchProfileImage(data) {
-      return axios.patch(`/users/profile/image`,data);
+        return axios.patch(`/users/profile/image`, data, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        });
     },
     patchPassword(data) {
-      return axios.patch(`/users/profile/password`,data);
+        return axios.patch(`/users/profile/password`, data, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        });
     },
     getPosts() {
-      return axios.get(`/users/posts`);
+        return axios.get(`/users/posts`, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
+            }
+        });
     }
 };

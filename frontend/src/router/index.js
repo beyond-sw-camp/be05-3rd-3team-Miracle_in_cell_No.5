@@ -1,10 +1,13 @@
-import { createRouter ,createWebHistory } from 'vue-router' ;
-import Main  from '../page/MainPage.vue' ; 
-import Room  from '../page/RoomPage.vue' ; 
-import ViewRoom  from '../page/ViewRoom.vue' ; 
-import ViewRooms  from '../page/ViewRooms.vue' ; 
-import EditRoom  from '../page/EditRoom.vue' ; 
-import Speaker from '../page/SpeakerReservation.vue' ;
+import {createRouter, createWebHistory} from 'vue-router';
+import Main from '../page/MainPage.vue';
+import Room from '../page/RoomPage.vue';
+import ViewRoom from '../page/ViewRoom.vue';
+import ViewRooms from '../page/ViewRooms.vue';
+import EditRoom from '../page/EditRoom.vue';
+import Speaker from '../page/SpeakerReservation.vue';
+import SubmitPost from '../page/SubmitPost.vue';
+import ViewPosts from '../page/ViewPosts.vue';
+import LoginPage from '../page/LoginPage.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -36,11 +39,11 @@ const router = createRouter({
                     component: EditRoom,
                 },
                 {
-                    path:"submitpost",
+                    path: "submitpost",
                     component: SubmitPost,
                 },
                 {
-                    path:"viewposts",
+                    path: "viewposts",
                     component: ViewPosts,
                 },
             ]
