@@ -1,5 +1,7 @@
 package com.hanwha.solbangulrest.post.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 import com.hanwha.solbangulrest.post.domain.Category;
 import com.hanwha.solbangulrest.post.domain.Post;
 import com.hanwha.solbangulrest.room.domain.Room;
@@ -15,8 +17,13 @@ public class PostSaveRequestDto {
 
 	private String loginId;
 	private Long roomId;
+
+	@NotBlank(message = "제목을 입력해주세요")
 	private String title;
+
+	@NotBlank(message = "내용을 입력해주세요")
 	private String content;
+
 	private Boolean anonymousYn;
 	private Category category;
 

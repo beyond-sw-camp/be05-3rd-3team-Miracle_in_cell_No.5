@@ -16,6 +16,8 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 
+import org.hibernate.annotations.ColumnDefault;
+
 import com.hanwha.solbangulrest.BaseTimeEntity;
 import com.hanwha.solbangulrest.comment.domain.Comment;
 import com.hanwha.solbangulrest.room.domain.Room;
@@ -56,6 +58,7 @@ public class Post extends BaseTimeEntity {
 	@Enumerated(EnumType.STRING)
 	private Category category;
 
+	@ColumnDefault("false")
 	private Boolean anonymousYn;
 	private Integer viewCount;
 	private Integer likesCount;

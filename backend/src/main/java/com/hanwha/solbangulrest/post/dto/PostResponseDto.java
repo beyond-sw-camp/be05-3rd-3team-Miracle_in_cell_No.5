@@ -14,6 +14,7 @@ import lombok.ToString;
 @ToString
 public class PostResponseDto {
 
+	private Long id;
 	private String title;
 	private String content;
 	private String authorNickname;
@@ -22,10 +23,11 @@ public class PostResponseDto {
 	private Integer viewCount;
 	private Boolean anonymousYn;
 	private String authorProfileImage;
-	private LocalDateTime createDate;
-	private LocalDateTime lastModifiedDate;
+	private LocalDateTime createdDateTime;
+	private LocalDateTime lastModifiedDateTime;
 
 	public PostResponseDto(Post post) {
+		this.id = post.getId();
 		this.title = post.getTitle();
 		this.content = post.getContent();
 		this.authorNickname = post.getAuthor().getNickname();
@@ -34,7 +36,7 @@ public class PostResponseDto {
 		this.viewCount = post.getViewCount();
 		this.anonymousYn = post.getAnonymousYn();
 		this.authorProfileImage = post.getAuthor().getProfileImage();
-		this.createDate = post.getCreatedDate();
-		this.lastModifiedDate = post.getLastModifiedDate();
+		this.createdDateTime = post.getCreatedDateTime();
+		this.lastModifiedDateTime = post.getLastModifiedDateTime();
 	}
 }

@@ -30,14 +30,14 @@ public class RoomService {
 
 	public RoomResponseDto findById(Long id) {
 		Room room = roomRepository.findById(id).orElseThrow(()
-			-> new IllegalArgumentException("해당 room이 없습니다. id=" + id));
+			-> new IllegalArgumentException("해당 room이 없습니다."));
 
 		return new RoomResponseDto(room);
 	}
-	
+
 	public List<PostResponseDto> findPostsByRoomId(Long id) {
 		Room room = roomRepository.findById(id).orElseThrow(()
-			-> new IllegalArgumentException("해당 room이 없습니다. id=" + id));
+			-> new IllegalArgumentException("해당 room이 없습니다."));
 
 		List<Post> posts = room.getPosts();
 		return posts.stream().map(PostResponseDto::new).toList();
@@ -46,8 +46,8 @@ public class RoomService {
 	@Transactional
 	public void update(Long id, RoomUpdateDto roomUpdateDto) {
 		Room room = roomRepository.findById(id).orElseThrow(()
-			-> new IllegalArgumentException("해당 room이 없습니다. id=" + id));
+			-> new IllegalArgumentException("해당 room이 없습니다."));
 
-		room.update(roomUpdateDto.getRoomName(),roomUpdateDto.getIntroduction());
+		room.update(roomUpdateDto.getRoomName(), roomUpdateDto.getIntroduction());
 	}
 }

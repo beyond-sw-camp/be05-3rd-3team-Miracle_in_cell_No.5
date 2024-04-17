@@ -11,15 +11,17 @@ import lombok.Setter;
 @Setter
 public class CommentResponseDto {
 
+	private Long id;
 	private String content;
 	private String nickname;
 	private String profileImage;
-	private LocalDateTime createdDate;
+	private LocalDateTime createdDateTime;
 
 	public CommentResponseDto(Comment comment) {
+		this.id = comment.getId();
 		this.content = comment.getContent();
 		this.nickname = comment.getAuthor().getNickname();
 		this.profileImage = comment.getAuthor().getProfileImage();
-		this.createdDate = comment.getCreatedDate();
+		this.createdDateTime = comment.getCreatedDateTime();
 	}
 }

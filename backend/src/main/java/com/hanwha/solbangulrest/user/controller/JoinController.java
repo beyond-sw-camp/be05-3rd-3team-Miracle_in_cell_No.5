@@ -60,17 +60,6 @@ public class JoinController {
 		return new Result<>(true, "메일 전송에 성공했습니다.", null);
 	}
 
-	@PostMapping("/mail/send/password-reset")
-	public Result<Void> sendMailForPasswordReset(@RequestBody @Valid EmailRequestDto emailRequestDto) {
-		log.info("비밀번호 변경을 위한 메일 전송={}", emailRequestDto.getEmail());
-		if (!joinService.isMember(emailRequestDto)) {
-			throw new MailCheckException("가입되지 않은 이메일입니다.");
-		}
-		mailService.sendEmail(emailRequestDto.getEmail());
-
-		return new Result<>(true, "메일 전송에 성공했습니다.", null);
-	}
-
 	@PostMapping("/mail/check")
 	public Result<Void> mailCheck(@RequestBody @Valid EmailRequestDto emailRequestDto, HttpSession session) {
 		boolean Checked = mailService.CheckAuthNum(emailRequestDto.getEmail(), emailRequestDto.getAuthNum());
@@ -92,6 +81,17 @@ public class JoinController {
 			return new Result<>(false, "이미 존재하는 아이디입니다.", null);
 		}
 		return new Result<>(true, "사용 가능한 아이디입니다.", null);
+	}
+
+	@PostMapping("/mail/send/password-reset")
+	public Result<Void> sendMailForPasswordReset(@RequestBody @Valid EmailRequestDto emailRequestDto) {
+		log.info("비밀번호 변경을 위한 메일 전송={}", emailRequestDto.getEmail());
+		if (!joinService.isMember(emailRequestDto)) {
+			throw new MailCheckException("가입되지 않은 이메일입니다.");
+		}
+		mailService.sendEmail(emailRequestDto.getEmail());
+
+		return new Result<>(true, "메일 전송에 성공했습니다.", null);
 	}
 
 	@PatchMapping("/password-reset")

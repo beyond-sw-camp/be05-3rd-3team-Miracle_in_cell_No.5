@@ -9,23 +9,22 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class RoomListResponseDto {
+
 	private Long id;
-
 	private String roomName;
-
 	private String introduction;
 
 	@Builder
-	public RoomListResponseDto(Long id, String roomName,String introduction) {
-		this.id = id ;
+	public RoomListResponseDto(Long id, String roomName, String introduction) {
+		this.id = id;
 		this.roomName = roomName;
 		this.introduction = introduction;
 	}
 
 	public RoomListResponseDto(Room room) {
-		this.id= room.getId() ;
-		this.roomName=room.getRoomName() ;
-		this.introduction=room.getIntroduction() ;
+		this.id = room.getId();
+		this.roomName = room.getRoomName();
+		this.introduction = room.getIntroduction();
 	}
 
 }

@@ -95,6 +95,15 @@ public class JoinService {
 	public void passwordReset(String gitEmail, PasswordResetDto passwordResetDto) {
 		User user = userRepository.findByGitEmail(gitEmail)
 			.orElseThrow(() -> new IllegalArgumentException("존재하지 않는 사용자입니다."));
+
+		if (!passwordEncoder.matches(passwordResetDto.getCurrentPassword(), user.getPassword())) {
+			throw new IllegalArgumentException("기존 비밀번호가 일치하지 않습니다.");
+		}
+
+		if (!passwordResetDto.getResetPassword().equals(passwordResetDto.getConfirmResetPassword())) {
+			throw new IllegalArgumentException("비밀번호 확인 값이 일치하지 않습니다.");
+		}
+
 		String encodePassword = passwordEncoder.encode(passwordResetDto.getResetPassword());
 		user.updatePassword(encodePassword);
 	}

@@ -16,14 +16,14 @@ import lombok.Setter;
 @Setter
 public class SpeakerDto {
 
-	@NotBlank
+	@NotBlank(message = "내용을 입력해주세요")
 	private String content;
 
-	@NotBlank
+	@NotBlank(message = "날짜를 입력해주세요")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate reservationDate;
 
-	@NotBlank
+	@NotBlank(message = "시간을 입력해주세요")
 	@DateTimeFormat(pattern = "HH:mm")
 	private LocalTime reservationTime;
 
