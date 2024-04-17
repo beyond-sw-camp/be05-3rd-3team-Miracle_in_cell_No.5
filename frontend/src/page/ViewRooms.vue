@@ -1,7 +1,7 @@
 <template>
   <div id="main-container" class="text-center">
         <div class="speaker">
-          <a><img class="speaker-img" src="img/speaker.png"/></a>
+          <router-link to="/speaker"><img class="speaker-img" src="img/speaker.png"/></router-link>
           <div class="speaker-content"><p>스피커 내용</p></div>
         </div>
 
@@ -47,5 +47,7 @@ export default {
 </script>
 
 <style>
-
+.main-container{
+  margin: auto;
+}   
 </style>

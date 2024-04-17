@@ -9,7 +9,7 @@ export default {
     getRoomById(roomId){
       return axios.get(`/room/${roomId}/view`) ;
     },
-    putRoomById(roomId,data){
-      return axios.put(`/room/${roomId}/edit`,data) ;
+    patchRoomById(roomId,data){
+      return axios.patch(`/room/${roomId}/edit`,data) ;
     }
 };
