@@ -11,7 +11,7 @@ export default {
         return axios.delete(`/posts/${postId}`) ;
     },
     getPostById(postId){
-        return axios.get(`/posts/${postId}`,data) ;
+        return axios.get(`/posts/${postId}`) ;
     },
     getPostsByRoomId(roomId,keyword,category){
         return axios.get(`/room/${roomId}/search`,keyword,category);

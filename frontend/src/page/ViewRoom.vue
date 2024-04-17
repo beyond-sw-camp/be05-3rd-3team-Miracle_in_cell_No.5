@@ -16,11 +16,13 @@
             <span>솔방울 개수</span></strong>
           </div>
           <div class='write-con isnotmyroom'>
-            <a><button class='write-btn'>글쓰기</button></a>
+            <!-- <a><button class='write-btn'>글쓰기</button></a> -->
+            <router-link :to="`/room/${roomId}/submitpost`"><button class="writepost">글쓰기</button></router-link>
           </div>
         </div>
         
-        <a><button class='viewpost-btn'>글 더보기...</button></a>
+        <!-- <a><button class='viewpost-btn'>글 더보기...</button></a> -->
+        <router-link :to="`/room/${roomId}/viewposts`"><button class="viewposts">글 더보기...</button></router-link>
       </div>
     </div>
 </template>
