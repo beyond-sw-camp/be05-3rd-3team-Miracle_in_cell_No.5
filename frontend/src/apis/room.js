@@ -1,15 +1,12 @@
 import axios from './config' ;
 export default {
-    postRoom(data) {
-      return axios.post('/room/save', data);
-    },
     getRooms() {
-      return axios.get("/room/list") ;
+      return axios.get("/room") ;
     },
     getRoomById(roomId){
-      return axios.get(`/room/${roomId}/view`) ;
+      return axios.get(`/room/${roomId}`) ;
     },
     patchRoomById(roomId,data){
-      return axios.patch(`/room/${roomId}/edit`,data) ;
+      return axios.patch(`/room/${roomId}`,data) ;
     }
 };
