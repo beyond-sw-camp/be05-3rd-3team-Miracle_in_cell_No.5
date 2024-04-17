@@ -11,10 +11,10 @@
         <div class="menu" id="navbarTogglerDemo02" >
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link" aria-current="page" href="#">관리자페이지</a>
+              <a class="nav-link" aria-current="page" href="../admin">관리자페이지</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">마이페이지</a>
+              <a class="nav-link" href="../mypage/my-info">마이페이지</a>
             </li>
             <li class="nav-item">
               <a class="nav-link">로그아웃</a>
