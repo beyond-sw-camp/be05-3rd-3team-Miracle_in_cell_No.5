@@ -1,17 +1,20 @@
 <template>
-  <form @submit.prevent="login">
-    <div>
+  <main class="form-signin text-center">
+    <img class="mb-4" src="/img/logo-orange.png" width="300" height="300">
+    <form @submit.prevent="login">
       <div>
-        <label for="username">username</label>
-        <input type="text" id="username" name="username" v-model="username">
+        <div>
+          <label for="username">username</label>
+          <input class="form-control" type="text" id="username" name="username" v-model="username">
+        </div>
+        <div>
+          <label for="password">password</label>
+          <input class="form-control" type="password" id="password" name="password" v-model="password">
+        </div>
       </div>
-      <div>
-        <label for="password">password</label>
-        <input type="password" id="password" name="password" v-model="password">
-      </div>
-    </div>
-    <button type="submit">로그인</button>
-  </form>
+      <button type="submit">로그인</button>
+    </form>
+  </main>
 </template>
 
 <script>
@@ -49,6 +52,50 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
+<style scoped>
+.field-error {
+  border-color: #dc3545;
+  color: #dc3545;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
+
+.form-signin {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+}
+
+.form-signin .checkbox {
+  font-weight: 400;
+}
+
+.form-signin .form-floating:focus-within {
+  z-index: 2;
+}
+
+.form-signin input[type="email"] {
+  margin-bottom: -1px;
+  border-bottom-right-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.form-signin input[type="password"] {
+  margin-bottom: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
 
 </style>

@@ -13,11 +13,15 @@ public class RoomResponseDto {
 	private String roomName;
 	private String introduction;
 	private String profileImage;
+	private String nickname;
+	private Integer solbangul;
 
 	public RoomResponseDto(Room room) {
 		this.id = room.getId();
 		this.roomName = room.getRoomName();
 		this.introduction = room.getIntroduction();
 		this.profileImage = room.getUser().getProfileImage();
+		this.nickname = room.getUser().getNickname();
+		this.solbangul = room.getUser().getSolbangul();
 	}
 }
