@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="mainpage">
       <MainHeader />
       <router-view></router-view>
       <AppFooter />
@@ -18,5 +18,10 @@
 </script>
   
 <style>
-    
+.mainpage{
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: #f5f5f5;
+}
 </style>

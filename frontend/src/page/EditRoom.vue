@@ -52,7 +52,7 @@ export default {
 
         const onSubmit = async () =>{
             try{
-                const response = await myRoomsApi.putRoomById(roomId,{
+                const response = await myRoomsApi.patchRoomById(roomId,{
                     roomName : room.value.roomName,
                     introduction : room.value.introduction 
                 }) ;

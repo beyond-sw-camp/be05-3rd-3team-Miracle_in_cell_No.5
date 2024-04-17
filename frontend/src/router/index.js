@@ -3,8 +3,8 @@ import Main  from '../page/MainPage.vue' ;
 import Room  from '../page/RoomPage.vue' ; 
 import ViewRoom  from '../page/ViewRoom.vue' ; 
 import ViewRooms  from '../page/ViewRooms.vue' ; 
-import CreateRoom  from '../page/CreateRoom.vue' ; 
 import EditRoom  from '../page/EditRoom.vue' ; 
+import Speaker from '../page/SpeakerReservation.vue' ;
 
 const router = createRouter({
     history: createWebHistory(),
@@ -18,8 +18,8 @@ const router = createRouter({
                     component : ViewRooms,
                 },
                 {
-                    path :"createroom",
-                    component: CreateRoom,
+                    path : "speaker",
+                    component : Speaker
                 }
             ]
         },
