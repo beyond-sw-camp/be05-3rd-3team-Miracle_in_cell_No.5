@@ -2,7 +2,14 @@
   <div id="main-container" class="text-center">
         <div class="speaker">
           <router-link to="/speaker"><img class="speaker-img" src="img/speaker.png"/></router-link>
-          <div class="speaker-content"><p>스피커 내용</p></div>
+          <div class="speaker-content">
+            <p>스피커 내용</p>
+            <div class="board-tools">
+              <img class="pen" src="@/img/pen.png">
+              <img class="eraser" src="@/img/es.png">
+            </div>
+          </div>
+          
         </div>
 
         <div class="rooms-container">

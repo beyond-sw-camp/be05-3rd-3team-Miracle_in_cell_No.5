@@ -44,6 +44,12 @@
     object-fit: cover;
   }
   
+  @media (max-width : 1100px ) {
+    .img {
+      width: 120px;
+      height: 120px;
+    }
+  }
   .cardcontent h3 {
     color: rgb(0, 0, 0);
     letter-spacing: 2px;
