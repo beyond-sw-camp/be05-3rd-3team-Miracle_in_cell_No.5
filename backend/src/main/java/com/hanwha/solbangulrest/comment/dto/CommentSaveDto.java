@@ -1,5 +1,7 @@
 package com.hanwha.solbangulrest.comment.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 import com.hanwha.solbangulrest.comment.domain.Comment;
 import com.hanwha.solbangulrest.post.domain.Post;
 import com.hanwha.solbangulrest.user.domain.User;
@@ -14,6 +16,8 @@ public class CommentSaveDto {
 
 	private Long postId;
 	private String loginId;
+
+	@NotBlank(message = "댓글을 입력해주세요")
 	private String content;
 
 	public Comment toEntity(Post post, User author) {

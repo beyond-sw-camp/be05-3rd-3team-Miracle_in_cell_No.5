@@ -31,9 +31,9 @@ public class CommentService {
 		String loginId = commentSaveDto.getLoginId();
 
 		Post post = postRepository.findById(postId).orElseThrow(
-			() -> new IllegalArgumentException("해당 post가 없습니다. id=" + postId));
+			() -> new IllegalArgumentException("해당 post가 없습니다."));
 		User author = userRepository.findByLoginId(loginId).orElseThrow(
-			() -> new IllegalArgumentException("해당 user가 없습니다. id=" + loginId));
+			() -> new IllegalArgumentException("해당 user가 없습니다."));
 
 		Comment comment = commentSaveDto.toEntity(post, author);
 		post.addComment(comment);
@@ -45,7 +45,7 @@ public class CommentService {
 	@Transactional
 	public void delete(Long id) {
 		Comment comment = commentRepository.findById(id).orElseThrow(
-			() -> new IllegalArgumentException("해당 comment가 없습니다. id=" + id));
+			() -> new IllegalArgumentException("해당 comment가 없습니다."));
 		Post post = comment.getPost();
 		post.removeComment(comment);
 		commentRepository.delete(comment);

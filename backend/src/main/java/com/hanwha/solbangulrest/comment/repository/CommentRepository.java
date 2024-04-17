@@ -9,6 +9,6 @@ import com.hanwha.solbangulrest.comment.domain.Comment;
 
 public interface CommentRepository extends JpaRepository<Comment, Long> {
 
-	@Query("SELECT c FROM Comment c WHERE c.post.id = :postId")
+	@Query("select c from Comment c join fetch c.author where c.post.id = :postId order by c.createdDateTime asc")
 	List<Comment> findByPostId(Long postId);
 }

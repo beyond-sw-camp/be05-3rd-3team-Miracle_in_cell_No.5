@@ -24,7 +24,7 @@ public interface PostRepository extends JpaRepository<Post, Long>, JpaSpecificat
 		+ "where p.author = :author "
 		+ "and p.room = :room "
 		+ "and p.category = :category "
-		+ "and day(p.createdDate) = day(current date)")
+		+ "and day(p.createdDateTime) = day(current date)")
 	boolean existsByLastPost(@Param("author") User author, @Param("room") Room room,
 		@Param("category") Category category);
 
