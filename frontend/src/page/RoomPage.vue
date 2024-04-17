@@ -1,21 +1,13 @@
 <template>
-  <div class="room-container">
-    <RoomHeader />
+  <component :is="$route.meta.layout || 'div'">
     <router-view></router-view>
-    <!-- <AppFooter /> -->
-  </div>
+  </component>
 </template>
 
 <script>
-import RoomHeader from '@/components/RoomHeader.vue';
-// import AppFooter from '@/components/AppFooter.vue';
 import { useRoute } from 'vue-router';
 
 export default {
-  components : {
-    RoomHeader,
-    // AppFooter,
-  },
   setup() {
     const route = useRoute() ;
     console.log("room page",route.params.id);
@@ -26,9 +18,9 @@ export default {
 </script>
 
 <style>
-.room-container{
+/* .room-container{
   display: flex;
   flex-direction: column;
   height: 100vh;
-}
+} */
 </style>

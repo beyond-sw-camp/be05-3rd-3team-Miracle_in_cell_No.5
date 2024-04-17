@@ -1,27 +1,34 @@
 <template>
-    <div class="mainpage">
-      <MainHeader />
+    <component :is="$route.meta.layout || 'div'">
       <router-view></router-view>
-      <AppFooter />
-    </div>
+    </component>
 </template>
   
 <script>
-  import MainHeader from '../components/MainHeader.vue';
-  import AppFooter from '../components/AppFooter.vue';
+// import { onMounted } from 'vue';
+
   export default {
-    components : {
-        MainHeader,
-        AppFooter,
-      },
+    setup() {
+      // const isAuth = () => {
+      //   return localStorage.getItem("jwtToken") ;
+      // }
+      // onMounted(()=>{
+      //   console.log("onmounted : ",isAuth())
+      //   if(!isAuth()){
+      //     // this.$router.push('/login');
+      //     window.location.href = '/login';
+      //   }
+      // })
+      
+    }
   }
 </script>
   
 <style>
-.mainpage{
+/* .mainpage{
   display: flex;
   flex-direction: column;
   height: 100vh;
   background-color: #f5f5f5;
-}
+} */
 </style>
