@@ -8,5 +8,8 @@ export default {
     },
     patchRoomById(roomId,data){
       return axios.patch(`/room/${roomId}`,data) ;
+    },
+    getSearchPosts(roomId,keyword,category){
+      return axios.get(`/room/${roomId}/search`,keyword,category) ;
     }
 };
