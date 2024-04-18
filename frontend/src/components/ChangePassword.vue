@@ -20,9 +20,9 @@
 </template>
 
 <script>
-import { ref } from 'vue';
-import { useRouter } from 'vue-router';
-import userApi from '@/apis/user'; 
+import {ref} from 'vue';
+import {useRouter} from 'vue-router';
+import userApi from '@/apis/user';
 
 export default {
   name: 'PasswordChange',
@@ -40,21 +40,19 @@ export default {
       }
     };
 
-    const changePassword = () => {
+    const changePassword = async () => {
       const data = {
         currentPassword: oldPassword.value,
         resetPassword: newPassword.value,
         confirmResetPassword: confirmPassword.value
       };
-      userApi.patchPassword(data)
-        .then(() => {
-          alert('비밀번호가 성공적으로 변경되었습니다.');
-          router.push('/mypage/my-info'); 
-        })
-        .catch(error => {
-          console.error('비밀번호 변경 실패:', error);
-          alert('비밀번호 변경에 실패했습니다. 다시 시도해 주세요.');
-        });
+      const response = await userApi.patchPassword(data);
+      if (response.data.isSuccess) {
+        alert('비밀번호가 변경되었습니다.');
+        router.push('/');
+      } else {
+        alert(response.data.message);
+      }
     };
 
     return {

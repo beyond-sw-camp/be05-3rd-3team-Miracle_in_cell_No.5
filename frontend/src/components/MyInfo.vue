@@ -47,8 +47,14 @@
 <script>
 import {onMounted, ref} from 'vue';
 import userApi from '@/apis/user';
+import room from "@/apis/room";
 
 export default {
+  computed: {
+    room() {
+      return room
+    }
+  },
   setup() {
     const user = ref({
       profileImage: '',
