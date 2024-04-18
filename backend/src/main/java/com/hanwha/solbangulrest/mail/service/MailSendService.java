@@ -46,7 +46,9 @@ public class MailSendService {
 	}
 
 	private void validateEmail(String email) {
-		if (!hanwhaUserRepository.existsByGitEmail(email)) {
+		Boolean existsByGitEmail = hanwhaUserRepository.existsByGitEmail(email);
+		System.out.println("existsByGitEmail = " + existsByGitEmail);
+		if (!existsByGitEmail) {
 			throw new MailCheckException("한화 SW교육 5기생만 가입 가능합니다.");
 		}
 	}

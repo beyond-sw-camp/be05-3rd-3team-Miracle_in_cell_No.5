@@ -1,10 +1,10 @@
-import { createRouter ,createWebHistory } from 'vue-router' ;
-import Main  from '../page/MainPage.vue' ;
-import Room  from '../page/RoomPage.vue' ;
-import ViewRoom  from '../page/ViewRoom.vue' ;
-import ViewRooms  from '../page/ViewRooms.vue' ;
-import EditRoom  from '../page/EditRoom.vue' ;
-import Speaker from '../page/SpeakerReservation.vue' ;
+import {createRouter, createWebHistory} from 'vue-router';
+import Main from '../page/MainPage.vue';
+import Room from '../page/RoomPage.vue';
+import ViewRoom from '../page/ViewRoom.vue';
+import ViewRooms from '../page/ViewRooms.vue';
+import EditRoom from '../page/EditRoom.vue';
+import Speaker from '../page/ReservationPage.vue';
 import SubmitPost from '../page/SubmitPost.vue';
 import LoginPage from '../page/LoginPage.vue';
 import MainLayout from '@/layouts/MainLayout.vue';
@@ -15,6 +15,8 @@ import MyInfo from '@/components/MyInfo.vue';
 import MyPosts from '@/components/MyPosts.vue';
 import ChangePassword from '@/components/ChangePassword.vue';
 import AdminPage from '../page/AdminPage.vue';
+import JoinMailPage from "@/page/JoinMailPage.vue";
+import JoinPage from "@/page/JoinPage.vue";
 
 
 const router = createRouter({
@@ -22,9 +24,9 @@ const router = createRouter({
     routes: [
         {
             path: "/",
-            component : Main,
-            meta : {layout : MainLayout },
-            children : [
+            component: Main,
+            meta: {layout: MainLayout},
+            children: [
                 {
                     path: "",
                     component: ViewRooms,
@@ -38,7 +40,7 @@ const router = createRouter({
         {
             path: "/room/:id/",
             component: Room,
-            meta : {layout : ArrowLayout },
+            meta: {layout: ArrowLayout},
             children: [
                 {
                     path: "",
@@ -53,7 +55,7 @@ const router = createRouter({
                     component: SubmitPost,
                 },
                 {
-                    path:"viewposts",
+                    path: "viewposts",
                     component: ViewPosts,
                 },
             ]
@@ -62,7 +64,14 @@ const router = createRouter({
             path: "/login",
             component: LoginPage,
         },
-
+        {
+            path: "/join/mail",
+            component: JoinMailPage,
+        },
+        {
+            path: "/join/info",
+            component: JoinPage,
+        },
         {
             path: '/mypage',
             component: MyPageLayout,
