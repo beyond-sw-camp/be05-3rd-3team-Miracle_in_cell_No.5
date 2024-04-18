@@ -60,7 +60,7 @@ export default {
 
     const getUser = async () =>{
       try{
-        const response = await myUsersApi.getLoginUserProfile() ;
+        const response = await myUsersApi.getUserProfile() ;
         console.log(response.data.data) ;
         user.value = response.data.data ;
       }catch(error){
