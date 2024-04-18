@@ -2,7 +2,7 @@
 <template>
   <div class="user-posts">
     <div class="container py-4">
-      <div class="row row-cols-1 row-cols-md-3 g-4">
+      <div class="row row-cols-1 row-cols-md-4 g-4">
         <div class="col" v-for="post in posts" :key="post.id">
           <div class="card h-100">
             <div class="card-body d-flex flex-column">
@@ -24,10 +24,12 @@
 <script>
 import { ref, onMounted } from 'vue';
 import userApi from '@/apis/user';
+import { useRouter } from 'vue-router'; // vue-router에서 useRouter를 가져옵니다.
 
 export default {
   setup() {
     const posts = ref([]);
+    const router = useRouter(); // 라우터 인스턴스를 사용합니다.
 
     const fetchPosts = async () => {
       try {
@@ -40,6 +42,7 @@ export default {
     };
 
     const viewPost = (id) => {
+      router.push(`/posts/${id}`); // 여기에서 URL로 이동합니다.
       console.log('자세히보기:', id);
     };
 
