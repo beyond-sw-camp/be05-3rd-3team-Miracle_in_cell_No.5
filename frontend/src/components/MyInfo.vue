@@ -161,7 +161,7 @@ export default {
   flex-direction: column;
   align-items: center; /* 가로 방향 가운데 정렬 */
   justify-content: flex-start; /* 세로 방향 시작 부분 정렬 */
-  height: 100%;
+  height: 100vh;
   background-color: #5F73B0;
   padding: 20px;
 }

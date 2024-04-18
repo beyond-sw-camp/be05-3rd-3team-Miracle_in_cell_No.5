@@ -1,5 +1,5 @@
 <template>
-    <div class="sidebar d-flex flex-column justify-content-center vh-100">
+    <div class="sidebar d-flex flex-column justify-content-center">
       <router-link to="/mypage/my-info" class="sidebar-item">내 정보 관리</router-link>
       <router-link to="/mypage/my-posts" class="sidebar-item">내가 쓴 글</router-link>
       <router-link to="/mypage/change-password" class="sidebar-item mb-4">비밀번호 수정</router-link>
