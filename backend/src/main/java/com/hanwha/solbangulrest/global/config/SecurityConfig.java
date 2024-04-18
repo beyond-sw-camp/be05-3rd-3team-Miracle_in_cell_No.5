@@ -61,7 +61,7 @@ public class SecurityConfig {
 				.requestMatchers("/login", "/logout", "/join/**", "/password/**", "/mail/**",
 					"/error/**", "/css/**", "/img/**", "/js/**", "/images/**", "room/**",
 					"/swagger-ui/**", "/swagger-ui.html", "/v3/api-docs/**", "/swagger-resource/**",
-					"/swagger-resources", "users/**").permitAll()
+					"/swagger-resources", "users/**","viewposts/**").permitAll()
 				.requestMatchers("/admin/**").hasRole("ADMIN")
 				.anyRequest().authenticated()
 			);

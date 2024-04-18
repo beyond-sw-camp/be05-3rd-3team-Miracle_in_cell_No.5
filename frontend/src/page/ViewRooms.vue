@@ -40,7 +40,7 @@ export default {
                 console.log(response.data.data) ;
                 roomList.value = response.data.data ;
         } catch (error) {
-                console.error("Error fetching scraps:", error);
+                console.error("Error viewrooms : ", error);
         }
       }
       getRoom() ;
