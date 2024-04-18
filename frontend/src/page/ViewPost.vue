@@ -80,7 +80,8 @@ export default {
     return {
       nickname,
       isUserPost,
-      post
+      post,
+      postId
     }
   }
 };
