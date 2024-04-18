@@ -18,17 +18,18 @@
       <button class="w-100 btn btn-lg btn-primary" type="submit">로그인</button>
       <hr>
       <p class="text-center text-muted mt-2 mb-0">계정이 없으신가요?
-        <a href="/join/step1" class="fw-bold text-body"><u>회원가입</u></a></p>
+        <a href="/join/mail" class="fw-bold text-body"><u>회원가입</u></a></p>
 
       <p class="text-center text-muted mt-2 mb-0">비밀번호를 잊어버리셨나요?
-        <a href="/password/step1" class="fw-bold text-body"><u>비밀번호 찾기</u></a></p>
+        <a href="/password/step1" class="fw-bold text-body"><u>비밀번호 찾기</u></a>
+      </p>
     </form>
   </main>
 </template>
 
 <script>
 import loginApi from '@/apis/login';
-import { ref} from "vue";
+import {ref} from "vue";
 import {useRouter} from "vue-router";
 
 export default {

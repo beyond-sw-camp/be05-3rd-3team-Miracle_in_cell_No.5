@@ -135,8 +135,12 @@ public class JoinService {
 		return userRepository.existsByLoginId(joinUserDto.getLoginId());
 	}
 
-	public boolean isMember(EmailRequestDto emailRequestDto) {
-		return hanwhaUserRepository.isMemberByGitEmail(emailRequestDto.getEmail());
+	public Boolean isMember(EmailRequestDto emailRequestDto) {
+		Boolean memberByGitEmail = hanwhaUserRepository.isMemberByGitEmail(emailRequestDto.getEmail());
+		if (memberByGitEmail == null) {
+			return false;
+		}
+		return memberByGitEmail;
 	}
 }
 

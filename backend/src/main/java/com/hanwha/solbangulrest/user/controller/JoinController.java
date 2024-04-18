@@ -33,15 +33,15 @@ public class JoinController {
 	private final MailSendService mailService;
 
 	@PostMapping
-	public Result<Void> join(@RequestBody @Valid JoinUserDto joinUserDto,
+	public Result<Void> join(@Valid JoinUserDto joinUserDto,
 		@SessionAttribute(name = "email", required = false) String email, HttpSession session) {
-		if (email == null) {
-			throw new MailCheckException("먼저 메일 인증을 해주세요.");
-		}
+		// if (email == null) {
+		// 	throw new MailCheckException("먼저 메일 인증을 해주세요.");
+		// }
 
-		if (!email.equals(joinUserDto.getGitEmail())) {
-			throw new MailCheckException("잘못된 이메일입니다.");
-		}
+		// if (!email.equals(joinUserDto.getGitEmail())) {
+		// 	throw new MailCheckException("잘못된 이메일입니다.");
+		// }
 
 		log.info("회원가입={}", joinUserDto);
 		joinService.join(joinUserDto);

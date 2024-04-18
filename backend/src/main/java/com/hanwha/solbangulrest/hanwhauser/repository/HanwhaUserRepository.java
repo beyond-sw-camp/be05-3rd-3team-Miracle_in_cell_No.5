@@ -14,5 +14,5 @@ public interface HanwhaUserRepository extends JpaRepository<HanwhaUser, Long> {
 	Boolean existsByGitEmail(String gitEmail);
 
 	@Query("select h.isMember from HanwhaUser h where h.gitEmail = :gitEmail")
-	boolean isMemberByGitEmail(String gitEmail);
+	Boolean isMemberByGitEmail(String gitEmail);
 }
