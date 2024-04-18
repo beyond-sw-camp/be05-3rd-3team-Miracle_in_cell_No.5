@@ -60,7 +60,7 @@ export default {
 .user-posts {
   background-color: #5F73B0; /* 배경색 설정 */
   padding: 1rem 0; /* 상하 패딩을 줘서 카드와의 간격을 조정합니다. */
-  height: 100%;
+  height: 100vh;
 }
 
 .user-posts .container {
