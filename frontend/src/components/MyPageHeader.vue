@@ -18,7 +18,7 @@
                 <a class="nav-link" href="../mypage/my-info">마이페이지</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link">로그아웃</a>
+                <a class="nav-link" @click="logout">로그아웃</a>
               </li>
             </ul>
           </div>
@@ -45,15 +45,24 @@
   <script>
   import '../css/Header.css';
   import { ref } from 'vue';
+  import {useRouter} from "vue-router";
   export default {
     setup(){
+      const router = useRouter();
       const toggle = ref(false) ;
+
+      const logout = () => {
+      localStorage.removeItem('token');
+      router.push('/login');
+    }
+
       const toggleMenu = () =>{
         toggle.value = !toggle.value ;
       }
       return{
         toggleMenu,
-        toggle
+        toggle,
+        logout
       }
     }
   }
