@@ -75,7 +75,7 @@ export default {
 
     const getNickname = async () => {
       try {
-        const user = await userApi.getUserProfile();
+        const user = await userApi.getLoginUserProfile();
         console.log("user data: ", user.data);
         nickname.value = user.data.data.nickname;
         console.log("nickname value:", nickname.value);
