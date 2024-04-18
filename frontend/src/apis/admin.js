@@ -10,7 +10,7 @@ export default {
         });
     },
     deletePost(postId) {
-        return axios.post('/admin/${postId}', {
+        return axios.delete(`/admin/${postId}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('token')
