@@ -60,8 +60,6 @@ import postApi from '@/apis/post';
 export default {
   setup() {
     const route = useRoute();
-    const roomId = route.params.id;
-    console.log("roomId:", roomId);
     const postId = route.params.id;
     console.log("postId:", postId);
 
@@ -74,6 +72,18 @@ export default {
     })
 
     const nickname = ref("");
+
+    const getPost = async () =>{
+            try{
+                const response = await postApi.getPostById(postId) ;
+                post.value = { ...response.data.data };  
+                console.log("edit post getPost res ," ,post.value) ;
+            }catch(e){
+                console.log("edit post getPost error, ",e) ;
+            }
+        }
+        getPost() ;
+
 
     const getNickname = async () => {
       try {
@@ -99,10 +109,10 @@ export default {
           content: post.value.content
         }
 
-        const response = await postApi.savePostById(roomId, data);
+        const response = await postApi.patchPostById(postId, data);
         console.log(response);
 
-        alert("저장되었습니다.");
+        alert("수정되었습니다.");
 
         window.location.href = `/posts/${postId}`;
       } catch (error) {
