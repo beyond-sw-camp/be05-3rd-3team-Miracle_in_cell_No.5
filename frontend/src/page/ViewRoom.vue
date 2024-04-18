@@ -1,7 +1,7 @@
 <template>
     <div class='roomInfo-container'>
       <div class='roomInfo'>
-        <img src="/img/Vector.png" class='room-profile'/>
+        <img src="@/img/board3.jpg" class='room-profile'/>
         <div class='myroom'>
           <h1 class='roomName'>{{room&&room.roomName}}</h1>
           <div class='roomIntroduction'>{{room&&room.introduction}}</div>

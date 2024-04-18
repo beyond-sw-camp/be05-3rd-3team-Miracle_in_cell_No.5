@@ -1,6 +1,7 @@
 <template>
+  <div class="vh-100">
     <MyPageHeader/>
-    <div class="d-flex" style="height: 100vh;">
+    <div class="d-flex" >
       <MyPageSidebar />
       <div class="flex-grow-1 container-fluid p-0">
         <!-- Content Header -->
@@ -10,18 +11,23 @@
         <!-- Main Content -->
         <router-view/>
       </div>
-    </div>
-  </template>
+  </div>
+  <AppFooter/>
+    
+  </div>
+</template>
   
   <script>
-  import MyPageHeader from './MyPageHeader.vue';
-  import MyPageSidebar from './MyPageSidebar.vue';
+  import AppFooter from '@/components/AppFooter.vue';
+import MyPageHeader from '@/components/MyPageHeader.vue';
+  import MyPageSidebar from '@/components/MyPageSidebar.vue';
   
   export default {
     components: {
-      MyPageSidebar,
-        MyPageHeader
-    }
+    MyPageSidebar,
+    MyPageHeader,
+    AppFooter
+}
   };
   </script>
   

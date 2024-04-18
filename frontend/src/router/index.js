@@ -12,7 +12,7 @@ import ArrowLayout from '@/layouts/ArrowLayout.vue';
 import ViewPost from '@/page/ViewPost.vue';
 import ViewPosts from '@/page/ViewPosts.vue';
 // import EditPost from '@/page/EditPost.vue';
-import MyPageLayout from '@/components/MyPageLayout.vue';
+import MyPageLayout from '@/layouts/MyPageLayout.vue';
 import MyInfo from '@/components/MyInfo.vue';
 import MyPosts from '@/components/MyPosts.vue';
 import ChangePassword from '@/components/ChangePassword.vue';
@@ -64,6 +64,7 @@ const router = createRouter({
         {
             path: "/posts/:id/",
             component: Room,
+            meta: {layout: ArrowLayout},
             children: [
                 {
                     path: "",

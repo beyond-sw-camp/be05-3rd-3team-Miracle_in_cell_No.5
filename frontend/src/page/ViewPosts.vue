@@ -1,6 +1,6 @@
 <template>
     <div id="main-container">
-        <form class="search-bar" @submit.prevent="onSubmit" v-if="existPage()">
+        <form class="search-bar" @submit.prevent="onSubmit">
             <select v-model="selectedCategory">
                 <option value="FREE">Free</option>
                 <option value="COMPLEMENT">Compliment</option>
