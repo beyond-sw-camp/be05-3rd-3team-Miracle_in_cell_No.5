@@ -5,22 +5,22 @@
         <div class="col-md-8">
           <div class="profile-card mb-3">
             <div class="profile-image">
-              <img :src="user.profileImage" alt="Profile Image" class="profile-img"/>
+              <img :src="`http://localhost:8080/images/${user.profileImage}`" alt="Profile Image" class="profile-img"/>
             </div>
             <h3 class="user-name">{{ user.nickname }}</h3>
           </div>
           <div class="user-details">
             <div class="mb-3">
               <label for="userId" class="form-label">아이디</label>
-              <input type="text" class="form-control-plaintext" readonly :value="user.loginId" />
+              <input type="text" class="form-control-plaintext" readonly :value="user.loginId"/>
             </div>
             <div class="mb-3">
               <label for="userEmail" class="form-label">이메일</label>
-              <input type="email" class="form-control-plaintext" readonly :value="user.gitEmail" />
+              <input type="email" class="form-control-plaintext" readonly :value="user.gitEmail"/>
             </div>
             <div class="mb-3">
               <label for="joinDate" class="form-label">가입 일자</label>
-              <input type="text" class="form-control-plaintext" readonly :value="formatDate(user.createdDateTime)" />
+              <input type="text" class="form-control-plaintext" readonly :value="formatDate(user.createdDateTime)"/>
             </div>
             <div class="button-row">
               <button class="edit-btn" @click="openModal('profileImage')">프로필 사진 수정</button>
@@ -45,7 +45,7 @@
 </template>
 
 <script>
-import { ref, onMounted } from 'vue';
+import {onMounted, ref} from 'vue';
 import userApi from '@/apis/user';
 
 export default {
@@ -66,7 +66,7 @@ export default {
       editing.value = mode;
       modalTitle.value = mode === 'profileImage' ? '프로필 사진 수정' : '닉네임 수정';
       showModal.value = true;
-      tempData.value = mode === 'nickname' ? user.value.nickname : ''; 
+      tempData.value = mode === 'nickname' ? user.value.nickname : '';
     };
 
     const closeModal = () => {
@@ -74,34 +74,34 @@ export default {
     };
 
     const updateData = async () => {
-  if (editing.value === 'nickname') {
-    const data = { nickname: tempData.value };
-    try {
-      const response = await userApi.patchProfile(data);
-      user.value.nickname = tempData.value;
-      console.log(response);
-      alert('닉네임이 성공적으로 변경되었습니다.');
-    } catch (error) {
-      console.error('Error updating nickname:', error.response);
-      const errorMessage = error.response && error.response.data && error.response.data.message
-        ? error.response.data.message
-        : '닉네임 변경에 실패했습니다.';
-      alert(errorMessage);
-    }
-  } else if (editing.value === 'profileImage') {
-    const imageData = tempData.value.split(',')[1]; // Base64 인코딩된 데이터
-    const data = { profileImage: imageData }; // DTO의 필드명에 맞춰서 객체 구성
-    try {
-      await userApi.patchProfileImage(data);
-      user.value.profileImage = tempData.value; // 화면에 표시할 이미지 경로를 업데이트
-      alert('프로필 사진이 성공적으로 변경되었습니다.');
-    } catch (error) {
-      console.error('Error updating profile image:', error.response);
-      alert('프로필 사진 변경에 실패했습니다.');
-    }
-  }
-  closeModal();
-};
+      if (editing.value === 'nickname') {
+        const data = {nickname: tempData.value};
+        try {
+          const response = await userApi.patchProfile(data);
+          user.value.nickname = tempData.value;
+          console.log(response);
+          alert('닉네임이 성공적으로 변경되었습니다.');
+        } catch (error) {
+          console.error('Error updating nickname:', error.response);
+          const errorMessage = error.response && error.response.data && error.response.data.message
+              ? error.response.data.message
+              : '닉네임 변경에 실패했습니다.';
+          alert(errorMessage);
+        }
+      } else if (editing.value === 'profileImage') {
+        const imageData = tempData.value.split(',')[1]; // Base64 인코딩된 데이터
+        const data = {profileImage: imageData}; // DTO의 필드명에 맞춰서 객체 구성
+        try {
+          await userApi.patchProfileImage(data);
+          user.value.profileImage = tempData.value; // 화면에 표시할 이미지 경로를 업데이트
+          alert('프로필 사진이 성공적으로 변경되었습니다.');
+        } catch (error) {
+          console.error('Error updating profile image:', error.response);
+          alert('프로필 사진 변경에 실패했습니다.');
+        }
+      }
+      closeModal();
+    };
 
     const handleFileUpload = event => {
       const files = event.target.files;
@@ -123,7 +123,7 @@ export default {
     };
 
     const formatDate = (dateString) => {
-      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      const options = {year: 'numeric', month: 'long', day: 'numeric'};
       return new Date(dateString).toLocaleDateString(undefined, options);
     };
 
@@ -131,11 +131,21 @@ export default {
       fetchUserProfile();
     });
 
-    return { user, showModal, editing, tempData, openModal, closeModal, updateData, handleFileUpload, modalTitle, formatDate };
+    return {
+      user,
+      showModal,
+      editing,
+      tempData,
+      openModal,
+      closeModal,
+      updateData,
+      handleFileUpload,
+      modalTitle,
+      formatDate
+    };
   }
 }
 </script>
-
 
 
 <style scoped>
@@ -162,7 +172,7 @@ export default {
 }
 
 .profile-image {
-    position: relative;
+  position: relative;
   display: flex; /* Flexbox를 사용 */
   justify-content: center; /* 가로 방향으로 가운데 정렬 */
   width: 100%; /* 전체 너비 */
@@ -204,22 +214,22 @@ export default {
   background: #cc8400; /* 호버 시 버튼 색상 변경 */
 }
 
-.form-label{
-    color: white;
-    font-size: 20px;
+.form-label {
+  color: white;
+  font-size: 20px;
 
 }
 
-.form-control-plaintext{
-    background-color: #ebf5e3;
-    border-radius: 16px;
-    padding: 8px;
-    font-size: 25px;
+.form-control-plaintext {
+  background-color: #ebf5e3;
+  border-radius: 16px;
+  padding: 8px;
+  font-size: 25px;
 }
 
-.user-name{
-    font-size: 25px;
-    text-align: center;
+.user-name {
+  font-size: 25px;
+  text-align: center;
 }
 
 .profile-image img {
@@ -293,14 +303,14 @@ export default {
   margin-top: 20px;
   border-radius: 8px;
   border: 1px solid #ccc;
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.1); /* 내부 그림자 추가 */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); /* 내부 그림자 추가 */
   font-size: 16px;
   transition: border-color 0.3s, box-shadow 0.3s; /* 부드러운 전환 효과 추가 */
 }
 
 .input:focus {
   border-color: #007bff; /* 포커스 상태일 때 테두리 색상 변경 */
-  box-shadow: inset 0 1px 3px rgba(0,0,0,0.2), 0 0 8px rgba(0,123,255,0.6); /* 포커스 시 그림자 강조 */
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2), 0 0 8px rgba(0, 123, 255, 0.6); /* 포커스 시 그림자 강조 */
 }
 
 /* 저장 버튼 스타일 업데이트 */

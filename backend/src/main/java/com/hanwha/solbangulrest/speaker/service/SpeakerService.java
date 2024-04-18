@@ -94,7 +94,8 @@ public class SpeakerService {
 	}
 
 	public SpeakerResponseDto findNowSpeaker() {
-		Speaker speaker = speakerRepository.findCurrentSpeakerContent();
+		Speaker speaker = speakerRepository.findCurrentSpeakerContent().orElseThrow(
+			() -> new IllegalArgumentException("현재 확성기가 없습니다."));
 		return new SpeakerResponseDto(speaker);
 	}
 }

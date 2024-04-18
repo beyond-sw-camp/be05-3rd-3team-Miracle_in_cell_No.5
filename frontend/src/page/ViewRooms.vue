@@ -48,16 +48,16 @@ export default {
     }
     getSpeakerContent();
 
-      const getRoom = async () => {
-        try {
-                const response = await myRoomsApi.getRooms() ;
-                console.log(response.data.data) ;
-                roomList.value = response.data.data ;
-        } catch (error) {
-                console.error("Error viewrooms : ", error);
-        }
+    const getRoom = async () => {
+      try {
+        const response = await myRoomsApi.getRooms();
+        console.log(response.data.data);
+        roomList.value = response.data.data;
+      } catch (error) {
+        console.error("Error viewrooms : ", error);
       }
-      getRoom() ;
+    }
+    getRoom();
 
     return {
       roomList,
