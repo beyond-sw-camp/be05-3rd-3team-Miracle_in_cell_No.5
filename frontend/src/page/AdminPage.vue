@@ -14,11 +14,11 @@
             </tr>
           </thead>
           <tbody>
-            <tr v-for="(post, index) in posts" :key="index">
+            <tr v-for="post in posts" :key="post.id">
               <td>{{ post.title }}</td>
-              <td>{{ post.author }}</td>
-              <td>{{ post.room }}</td>
-              <td>{{ post.date }}</td>
+              <td>{{ post.authorNickname }}</td>
+              <td>{{ post.roomUserNickname }}</td>
+              <td>{{ post.createdDateTime }}</td>
               <td>
                 <button @click="deletePost(post.id)" class="btn btn-danger">X</button>
               </td>
@@ -30,32 +30,51 @@
   </template>
   
   <script>
+  import { ref, onMounted } from 'vue';
   import MyPageHeader from '@/components/MyPageHeader.vue';
+  import adminApi from '@/apis/admin';
   
   export default {
     components: {
       MyPageHeader
     },
-    data() {
-      return {
-        // 더미 데이터입니다. 실제 백엔드 연결 시 대체됩니다.
-        posts: [
-          { id: 1, title: '제목 1', author: '작성자 1', room: '방 1', date: '2024-01-01' },
-          { id: 1, title: '제목 1', author: '작성자 1', room: '방 1', date: '2024-01-01' },
-          { id: 1, title: '제목 1', author: '작성자 1', room: '방 1', date: '2024-01-01' },
-          { id: 1, title: '제목 1', author: '작성자 1', room: '방 1', date: '2024-01-01' }
-        ]
+    setup() {
+      const posts = ref([]);
+  
+
+      const loadPosts = async () => {
+        try {
+          const response = await adminApi.getViewAllPosts();
+      
+          console.log(response.data.data.content);
+    
+          posts.value = response.data.data.content; 
+        } catch (error) {
+          console.error('Error fetching posts:', error);
+        }
       };
-    },
-    methods: {
-      deletePost(postId) {
-        // 여기에서 삭제 로직을 구현합니다.
-        // 이 예시에서는 더미 데이터를 필터링하여 삭제합니다.
-        this.posts = this.posts.filter(post => post.id !== postId);
-      }
+  
+      const deletePost = async (postId) => {
+        try {
+          await adminApi.deletePost(postId);
+          loadPosts(); 
+        } catch (error) {
+          console.error('Error deleting post:', error);
+        }
+      };
+  
+  
+      onMounted(loadPosts);
+  
+
+      return {
+        posts,
+        deletePost
+      };
     }
   };
   </script>
+
   
   <style scoped>
   .admin-posts-container {
