@@ -9,7 +9,9 @@ import SubmitPost from '../page/SubmitPost.vue';
 import LoginPage from '../page/LoginPage.vue';
 import MainLayout from '@/layouts/MainLayout.vue';
 import ArrowLayout from '@/layouts/ArrowLayout.vue';
+import ViewPost from '@/page/ViewPost.vue';
 import ViewPosts from '@/page/ViewPosts.vue';
+// import EditPost from '@/page/EditPost.vue';
 import MyPageLayout from '@/components/MyPageLayout.vue';
 import MyInfo from '@/components/MyInfo.vue';
 import MyPosts from '@/components/MyPosts.vue';
@@ -17,7 +19,6 @@ import ChangePassword from '@/components/ChangePassword.vue';
 import AdminPage from '../page/AdminPage.vue';
 import JoinMailPage from "@/page/JoinMailPage.vue";
 import JoinPage from "@/page/JoinPage.vue";
-
 
 const router = createRouter({
     history: createWebHistory(),
@@ -61,6 +62,20 @@ const router = createRouter({
             ]
         },
         {
+            path: "/posts/:id/",
+            component: Room,
+            children: [
+                {
+                    path: "",
+                    component: ViewPost
+                },
+                // {
+                //     path: "editpost",
+                //     component: EditPost
+                // },
+            ]
+        },
+        {
             path: "/login",
             component: LoginPage,
         },
@@ -93,7 +108,6 @@ const router = createRouter({
                 }
             ]
         },
-
         {
             path: '/admin',
             component: AdminPage

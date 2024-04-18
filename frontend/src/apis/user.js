@@ -1,7 +1,7 @@
 import axios from './config';
 
 export default {
-    getLoginUserProfile() {
+    getUserProfile() {
         return axios.get(`/users/profile`, {
             headers: {
                 'Content-Type': 'application/json',
