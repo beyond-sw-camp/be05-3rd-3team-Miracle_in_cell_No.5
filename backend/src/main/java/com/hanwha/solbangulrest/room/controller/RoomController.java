@@ -1,5 +1,6 @@
 package com.hanwha.solbangulrest.room.controller;
 
+import java.io.Console;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
@@ -22,10 +23,12 @@ import com.hanwha.solbangulrest.room.dto.RoomUpdateDto;
 import com.hanwha.solbangulrest.room.service.RoomService;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RequiredArgsConstructor
 @RequestMapping("/room")
 @RestController
+@Slf4j
 public class RoomController {
 
 	private final RoomService roomService;
@@ -53,9 +56,10 @@ public class RoomController {
 	public Result<Page<PostResponseDto>> searchPosts(@PathVariable Long roomId,
 		@RequestParam(value = "keyword", defaultValue = "") String keyword,
 		@RequestParam(value = "category", defaultValue = "") String category,
+		@RequestParam(value = "pageNumber", defaultValue = "1") int pageNumber,
 		@PageableDefault(size = 10, sort = "createdDateTime", direction = Sort.Direction.DESC) Pageable pageable) {
-
-		Page<PostResponseDto> posts = postService.search(keyword, category, roomId, pageable);
+		log.info("pageNumber >>>>> {}",pageNumber);
+		Page<PostResponseDto> posts = postService.search(keyword, category, roomId, pageNumber,pageable);
 		return new Result<>(true, "방 글 검색 결과", posts);
 	}
 }

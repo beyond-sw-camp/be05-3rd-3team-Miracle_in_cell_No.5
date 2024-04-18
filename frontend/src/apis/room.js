@@ -29,14 +29,18 @@ export default {
             }
         );
     },
-    getSearchPosts(roomId, keyword, category) {
-        return axios.get(`/room/${roomId}/search`, keyword, category,
-            {
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization': localStorage.getItem('token')
-                }
+    getSearchPosts(roomId, keyword, category, page) {
+        return axios.get(`/room/${roomId}/search`, {
+            params: {
+                keyword: keyword,
+                category: category,
+                pageNumber: page.toString() 
+            },
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': localStorage.getItem('token')
             }
-        );
+        });
     }
+    
 };

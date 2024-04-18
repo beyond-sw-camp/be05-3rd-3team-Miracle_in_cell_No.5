@@ -38,8 +38,8 @@ export default {
         const getRoom = async () =>{
             try{
                 const response = await myRoomsApi.getRoomById(roomId) ;
-                console.log("edit room getRoom res ," ,response.data.data) ;
                 room.value = { ...response.data.data };  
+                console.log("edit room getRoom res ," ,room.value.roomName) ;
             }catch(e){
                 console.log("edit room getRoom error, ",e) ;
             }
@@ -48,12 +48,12 @@ export default {
 
         const onSubmit = async () =>{
             try{
-                const response = await myRoomsApi.patchRoomById(roomId,{
+                await myRoomsApi.patchRoomById(roomId,{
                     roomName : room.value.roomName,
                     introduction : room.value.introduction 
                 }) ;
-                console.log("edit room putRoom res ," ,response.data.data) ;
-                room.value= response.data.data ;
+                // console.log("edit room putRoom res ," ,response.data.data) ;
+                // room.value= response.data.data ;
                 router.go(-1) ;
             }catch(e){
                 console.log("edit room putRoom error, ",e)

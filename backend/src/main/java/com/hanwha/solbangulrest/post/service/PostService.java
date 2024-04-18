@@ -3,6 +3,7 @@ package com.hanwha.solbangulrest.post.service;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
@@ -85,22 +86,47 @@ public class PostService {
 		postRepository.delete(post);
 	}
 
-	@Transactional
-	public Page<PostResponseDto> search(String keyword, String category, Long roomId, Pageable pageable) {
+	// @Transactional
+	// public Page<PostResponseDto> search(String keyword, String category, Long roomId, Pageable pageable) {
+	//
+	// 	Specification<Post> spec = Specification.where(PostSpecification.likeContents(keyword));
+	// 	spec = spec.or(PostSpecification.likeTitle(keyword));
+	// 	spec = spec.or(PostSpecification.likeAuthor(keyword));
+	// 	spec = spec.and(PostSpecification.findByRoomId(roomId));
+	//
+	// 	spec = switch (category) {
+	// 		case "COMPLEMENT" -> spec.and(PostSpecification.findByCategory(Category.COMPLIMENT));
+	// 		case "CLAIMS" -> spec.and(PostSpecification.findByCategory(Category.CLAIMS));
+	// 		case "FREE" -> spec.and(PostSpecification.findByCategory(Category.FREE));
+	// 		default -> spec;
+	// 	};
+	//
+	// 	Page<Post> posts = postRepository.findAll(spec, pageable);
+	//
+	// 	return posts.map(PostResponseDto::new);
+	// }
+	@Transactional(readOnly = true)
+	public Page<PostResponseDto> search(String keyword, String category, Long roomId, int pageNumber, Pageable pageable) {
+		Specification<Post> spec = Specification.where(PostSpecification.likeContents(keyword))
+			.or(PostSpecification.likeTitle(keyword))
+			.or(PostSpecification.likeAuthor(keyword))
+			.and(PostSpecification.findByRoomId(roomId));
 
-		Specification<Post> spec = Specification.where(PostSpecification.likeContents(keyword));
-		spec = spec.or(PostSpecification.likeTitle(keyword));
-		spec = spec.or(PostSpecification.likeAuthor(keyword));
-		spec = spec.and(PostSpecification.findByRoomId(roomId));
+		switch (category) {
+			case "COMPLEMENT":
+				spec = spec.and(PostSpecification.findByCategory(Category.COMPLIMENT));
+				break;
+			case "CLAIMS":
+				spec = spec.and(PostSpecification.findByCategory(Category.CLAIMS));
+				break;
+			case "FREE":
+				spec = spec.and(PostSpecification.findByCategory(Category.FREE));
+				break;
+			default:
+				break;
+		}
 
-		spec = switch (category) {
-			case "COMPLEMENT" -> spec.and(PostSpecification.findByCategory(Category.COMPLIMENT));
-			case "CLAIMS" -> spec.and(PostSpecification.findByCategory(Category.CLAIMS));
-			case "FREE" -> spec.and(PostSpecification.findByCategory(Category.FREE));
-			default -> spec;
-		};
-
-		Page<Post> posts = postRepository.findAll(spec, pageable);
+		Page<Post> posts = postRepository.findAll(spec, PageRequest.of(pageNumber-1, pageable.getPageSize(), pageable.getSort()));
 
 		return posts.map(PostResponseDto::new);
 	}

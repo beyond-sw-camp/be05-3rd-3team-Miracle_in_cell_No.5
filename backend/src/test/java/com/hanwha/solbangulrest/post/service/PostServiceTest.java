@@ -240,7 +240,7 @@ class PostServiceTest {
 
 		// then
 		PageRequest pageable = PageRequest.of(0, 10);
-		Page<PostResponseDto> postPage = postService.search("", Category.COMPLIMENT.toString(), roomId, pageable);
+		Page<PostResponseDto> postPage = postService.search("", Category.COMPLIMENT.toString(), roomId, 1,pageable);
 
 		List<PostResponseDto> posts = postPage.getContent();
 		assertThat(posts.size()).isEqualTo(10);

@@ -36,8 +36,8 @@ export default {
             }
         );
     },
-    getPostsByRoomId(roomId, keyword, category) {
-        return axios.get(`/room/${roomId}/search`, keyword, category, {
+    getPostsByRoomId(roomId, keyword, category,pageNumber) {
+        return axios.get(`/room/${roomId}/search?keyword=${keyword}&category=${category}&pageNumber=${pageNumber}`, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': localStorage.getItem('token')
