@@ -11,8 +11,8 @@ export default {
             }
         );
     },
-    getFindSpeaker(reservationDate) {
-        return axios.get('/speakers/date', reservationDate, {
+    getFindSpeaker(data) {
+        return axios.get(`/speakers/date?reservationDate=${data}`, {
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('token')

@@ -38,4 +38,7 @@ public interface PostRepository extends JpaRepository<Post, Long>, JpaSpecificat
 
 	@Query("select p from Post p where p.room.id = :roomId")
 	Page<Post> findPostsByRoomIdPaging(@Param("roomId") Long roomId, Pageable pageable);
+
+	@Query("select p from Post p where p.author.id = :authorId")
+	Page<Post> findPostsByAuthorIdPaging(@Param("authorId") Long authorId, Pageable pageable);
 }

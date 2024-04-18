@@ -84,8 +84,7 @@ public class UserService {
 			() -> new IllegalArgumentException("해당 사용자를 찾을 수 없습니다.")
 		);
 
-		Page<Post> posts = postRepository.findPostsByRoomIdPaging(user.getRoom().getId(), pageable);
-
+		Page<Post> posts = postRepository.findPostsByAuthorIdPaging(user.getId(), pageable);
 		return posts.map(PostResponseDto::new);
 	}
 }
