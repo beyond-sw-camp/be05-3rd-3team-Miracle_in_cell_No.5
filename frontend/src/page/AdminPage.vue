@@ -1,9 +1,7 @@
 <template>
     <div class="whole-container">
-      <!-- MyPageHeader 컴포넌트를 포함합니다 -->
       <MyPageHeader />
   
-      <!-- 게시글 목록을 나열하는 섹션 -->
       <div class="admin-posts-container">
         <table class="table">
           <thead>

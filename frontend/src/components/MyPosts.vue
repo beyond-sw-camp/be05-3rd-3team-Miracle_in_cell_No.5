@@ -1,80 +1,86 @@
+
 <template>
-  <div class="container my-3 custom-background"> <!-- 사용자 정의 배경색을 컨테이너에 적용 -->
-    <div class="row">
-      <div class="col-md-4 mb-3" v-for="post in posts" :key="post.id">
-        <div class="card custom-card-color"> <!-- 사용자 정의 카드 색상 적용 -->
-          <div class="card-body">
-            <h5 class="card-title">{{ post.title }}</h5>
-            <h6 class="card-subtitle mb-2">방: {{ post.room }}</h6>
-            <p class="card-text">카테고리: {{ post.category }}</p>
-            <p class="card-text">작성일: {{ new Date(post.createdAt).toLocaleDateString() }}</p>
-            <a href="#" class="btn btn-outline-secondary btn-sm" @click="viewPost(post.id)">보기</a>
+  <div class="user-posts">
+    <div class="container py-4">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" v-for="post in posts" :key="post.id">
+          <div class="card h-100">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">{{ post.title }}</h5>
+              <p class="card-text">ROOM : {{ post.roomUserNickname }}</p>
+              <p class="card-text">{{ post.category }}</p>
+              <p class="card-text"><small>{{ post.createdDateTime }}</small></p>
+              <div class="mt-auto">
+                <button class="btn btn-primary w-100" @click="viewPost(post.id)">View</button>
+              </div>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <script>
-import User from '@/apis/user';
+import { ref, onMounted } from 'vue';
+import userApi from '@/apis/user';
 
 export default {
-  name: 'MyPosts',
-  data() {
-    return {
-      posts: []
+  setup() {
+    const posts = ref([]);
+
+    const fetchPosts = async () => {
+      try {
+        const response = await userApi.getUserPosts();
+        posts.value = response.data.data.content;
+        console.log(response.data.data.content);
+      } catch (error) {
+        console.error('정보를 불러오지 못했습니다:', error);
+      }
     };
-  },
-  methods: {
-    fetchPosts() {
-      User.getUserPosts()
-        .then(response => {
-          this.posts = response.data;
-        })
-        .catch(error => {
-          console.error(error);
-        });
-    },
-    viewPost(postId) {
-      this.$router.push({ name: 'PostDetail', params: { id: postId } });
-    }
-  },
-  created() {
-    this.fetchPosts();
+
+    const viewPost = (id) => {
+      console.log('자세히보기:', id);
+    };
+
+    onMounted(fetchPosts);
+
+    return {
+      posts,
+      viewPost
+    };
   }
-};
+}
 </script>
 
 <style scoped>
-/* 사용자 정의 색상 변수 선언 */
-:root {
-  --card-bg-color: #f0e68c; /* 카드 배경색 (카키색) */
-  --background-color: #f5f5dc; /* 배경색 (베이지색) */
+.user-posts {
+  background-color: #5F73B0; /* 배경색 설정 */
+  padding: 1rem 0; /* 상하 패딩을 줘서 카드와의 간격을 조정합니다. */
+  height: 100%;
 }
 
-.custom-card-color {
-  background-color: rgb(221, 204, 167); /* 변수로 지정된 색상 사용 */
-  color: black; /* 카드 내용의 텍스트 색상 */
+.user-posts .container {
+  max-width: 1240px; /* or your preferred max width */
 }
 
-.custom-background {
-  background-color: #5F73B0; /* 변수로 지정된 색상 사용 */
-  height: 100vh;
-  /* 추가적인 배경 스타일링을 여기에 작성하세요 */
-}
-
-.container {
-  padding: 20px; /* 컨테이너 패딩 조정 */
-}
-
-/* 카드 간격과 반응형 디자인을 위한 추가 스타일링 */
 .card {
-  margin-bottom: 1rem;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2); /* Adds shadow to the cards */
+  transition: 0.3s; /* Smooth transition for hover effect */
 }
 
-@media (max-width: 768px) {
-  .card {
-    width: 100%; /* 모바일 뷰에서 카드 너비를 조정 */
-  }
+.card:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); /* Slightly larger shadow on hover */
 }
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+}
+
+.btn-primary {
+  margin-top: auto; /* Pushes the button to the bottom of the card */
+}
+
+
 </style>
