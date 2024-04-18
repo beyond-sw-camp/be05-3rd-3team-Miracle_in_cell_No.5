@@ -12,15 +12,15 @@
           <div class="user-details">
             <div class="mb-3">
               <label for="userId" class="form-label">아이디</label>
-              <p class="form-control-plaintext">{{ user.loginId }}</p>
+              <input type="text" class="form-control-plaintext" readonly :value="user.loginId" />
             </div>
             <div class="mb-3">
               <label for="userEmail" class="form-label">이메일</label>
-              <p class="form-control-plaintext">{{ user.gitEmail }}</p>
+              <input type="email" class="form-control-plaintext" readonly :value="user.gitEmail" />
             </div>
             <div class="mb-3">
               <label for="joinDate" class="form-label">가입 일자</label>
-              <p class="form-control-plaintext">{{ new Date(user.createdDateTime).toLocaleDateString() }}</p>
+              <input type="text" class="form-control-plaintext" readonly :value="formatDate(user.createdDateTime)" />
             </div>
             <div class="button-row">
               <button class="edit-btn" @click="openModal('profileImage')">프로필 사진 수정</button>
@@ -35,8 +35,9 @@
     <div v-if="showModal" class="modal">
       <div class="modal-content">
         <span class="close" @click="closeModal">&times;</span>
-        <h3>{{ editing === 'profileImage' ? '프로필 사진 수정' : '닉네임 수정' }}</h3>
-        <input v-model="tempData" :type="editing === 'profileImage' ? 'file' : 'text'"/>
+        <h3>{{ modalTitle }}</h3>
+        <input v-if="editing === 'profileImage'" type="file" @change="handleFileUpload"/>
+        <input v-else v-model="tempData" type="text"/>
         <button @click="updateData">저장</button>
       </div>
     </div>
@@ -59,13 +60,13 @@ export default {
     const showModal = ref(false);
     const editing = ref('');
     const tempData = ref('');
+    const modalTitle = ref('');
 
     const openModal = (mode) => {
       editing.value = mode;
+      modalTitle.value = mode === 'profileImage' ? '프로필 사진 수정' : '닉네임 수정';
       showModal.value = true;
-      if (mode === 'nickname') {
-        tempData.value = user.value.nickname; 
-      }
+      tempData.value = mode === 'nickname' ? user.value.nickname : ''; 
     };
 
     const closeModal = () => {
@@ -73,47 +74,64 @@ export default {
     };
 
     const updateData = async () => {
-      if (editing.value === 'nickname') {
-        // 닉네임 변경 요청
-        const data = { nickname: tempData.value };
-        try {
-          await userApi.patchNickname(data);
-          user.value.nickname = tempData.value; // 사용자 상태 업데이트
-          alert('닉네임이 성공적으로 변경되었습니다.');
-        } catch (error) {
-          alert('닉네임 변경에 실패했습니다.');
-        }
-      } else if (editing.value === 'profileImage') {
-        // 프로필 이미지 변경 요청
-        const formData = new FormData();
-        formData.append('image', tempData.value);
-        try {
-          await userApi.patchProfileImage(formData);
-          user.value.profileImage = URL.createObjectURL(tempData.value); // 프로필 이미지 미리보기 업데이트
-          alert('프로필 사진이 성공적으로 변경되었습니다.');
-        } catch (error) {
-          alert('프로필 사진 변경에 실패했습니다.');
-        }
-      }
-      closeModal();
-    };
+  if (editing.value === 'nickname') {
+    const data = { nickname: tempData.value };
+    try {
+      const response = await userApi.patchProfile(data);
+      user.value.nickname = tempData.value;
+      console.log(response);
+      alert('닉네임이 성공적으로 변경되었습니다.');
+    } catch (error) {
+      console.error('Error updating nickname:', error.response);
+      const errorMessage = error.response && error.response.data && error.response.data.message
+        ? error.response.data.message
+        : '닉네임 변경에 실패했습니다.';
+      alert(errorMessage);
+    }
+  } else if (editing.value === 'profileImage') {
+    const imageData = tempData.value.split(',')[1]; // Base64 인코딩된 데이터
+    const data = { profileImage: imageData }; // DTO의 필드명에 맞춰서 객체 구성
+    try {
+      await userApi.patchProfileImage(data);
+      user.value.profileImage = tempData.value; // 화면에 표시할 이미지 경로를 업데이트
+      alert('프로필 사진이 성공적으로 변경되었습니다.');
+    } catch (error) {
+      console.error('Error updating profile image:', error.response);
+      alert('프로필 사진 변경에 실패했습니다.');
+    }
+  }
+  closeModal();
+};
 
-    const handleFileUpload = (event) => {
-      tempData.value = event.target.files[0]; // 파일 선택 처리
+    const handleFileUpload = event => {
+      const files = event.target.files;
+      if (files.length > 0) {
+        const file = files[0];
+        const reader = new FileReader();
+        reader.onload = e => {
+          tempData.value = e.target.result; // Base64 데이터
+        };
+        reader.readAsDataURL(file);
+      }
     };
 
     const fetchUserProfile = async () => {
-      const response = await userApi.getUserProfile();
+      const response = await userApi.getLoginUserProfile();
       if (response.data.data) {
         user.value = response.data.data;
       }
+    };
+
+    const formatDate = (dateString) => {
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      return new Date(dateString).toLocaleDateString(undefined, options);
     };
 
     onMounted(() => {
       fetchUserProfile();
     });
 
-    return { user, showModal, editing, tempData, openModal, closeModal, updateData, handleFileUpload };
+    return { user, showModal, editing, tempData, openModal, closeModal, updateData, handleFileUpload, modalTitle, formatDate };
   }
 }
 </script>
