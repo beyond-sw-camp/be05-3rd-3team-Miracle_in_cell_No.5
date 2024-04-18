@@ -78,6 +78,7 @@ export default {
   padding: 200px;
   padding-top: 1px;
   min-height: 100vh;
+  color: black;
 }
 
 .password-form {
@@ -86,10 +87,12 @@ export default {
   background-color: white;
   padding: 40px;
   border-radius: 15px;
+  color: black;
 }
 
 .form-group {
   margin-bottom: 1.5rem;
+  color: black;
 }
 
 .form-control {
