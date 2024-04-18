@@ -49,6 +49,7 @@ public class SpeakerController {
 
 	@GetMapping("/now")
 	public Result<SpeakerResponseDto> findNowSpeaker() {
+		System.out.println("SpeakerController.findNowSpeaker");
 		SpeakerResponseDto speakers = speakerService.findNowSpeaker();
 		return new Result<>(true, "현재 시간 확성기 조회", speakers);
 	}
