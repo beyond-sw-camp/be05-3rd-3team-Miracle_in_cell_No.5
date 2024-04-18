@@ -11,7 +11,7 @@ import MainLayout from '@/layouts/MainLayout.vue';
 import ArrowLayout from '@/layouts/ArrowLayout.vue';
 import ViewPost from '@/page/ViewPost.vue';
 import ViewPosts from '@/page/ViewPosts.vue';
-// import EditPost from '@/page/EditPost.vue';
+import EditPost from '@/page/EditPost.vue';
 import MyPageLayout from '@/layouts/MyPageLayout.vue';
 import MyInfo from '@/components/MyInfo.vue';
 import MyPosts from '@/components/MyPosts.vue';
@@ -70,10 +70,10 @@ const router = createRouter({
                     path: "",
                     component: ViewPost
                 },
-                // {
-                //     path: "editpost",
-                //     component: EditPost
-                // },
+                {
+                    path: "editpost",
+                    component: EditPost
+                },
             ]
         },
         {

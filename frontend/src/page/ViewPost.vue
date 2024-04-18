@@ -16,7 +16,11 @@
                         <h5>작성자: <span v-if="post">{{ post.authorNickname }}</span>&nbsp;&nbsp;
                             카테고리: <span v-if="post">{{ post.category }}</span>&nbsp;&nbsp;
                             조회수: <span v-if="post">{{ post.viewCount }}</span>&nbsp;&nbsp;
-                            작성일: <span v-if="post">{{ post.createdDateTime }}</span></h5>
+                            작성일: <span v-if="post">{{ post.createdDateTime }}</span>
+                        </h5>
+                    </div>
+                    <div class='ismypost' v-if="isUserPost(nickname)">
+                        <router-link :to="`/posts/${postId}/editpost`"><button class='edit-btn'>수정</button></router-link>
                     </div>
                     <br>
                     <div class="form-group">
@@ -24,9 +28,6 @@
                             <h3>{{ post.content }}</h3>
                         </div>
                     </div>
-                    <!-- <div class='ismypost' v-if="isUserPost(post.authorNickname)">
-                        <router-link :to="`/posts/${post.id}/editpost`"><button class='edit-btn'>수정</button></router-link>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -37,20 +38,27 @@
 import postApi from '@/apis/post';
 import { ref } from 'vue';
 import { useRoute } from 'vue-router';
-// import room from '@/apis/room';
-// import userApi from '@/apis/user';
+import userApi from '@/apis/user';
 
 export default {
     setup() {
         const route = useRoute();
         const postId = route.params.id;
         console.log("postId: ", postId);
-        const post = ref(null);
+        const post = ref();
+        const nickname = ref('');
 
-        // const isUserPost = (authorNickname) => {
-        //     console.log("nickname", authorNickname);
-        //     return authorNickname === userApi.getUserProfile().authorNickname;
-        // }
+        const isUserPost = async (nickname) => {
+            try {
+                console.log("nickname", nickname);
+                const userProfile = await userApi.getUserProfile();
+                console.log("userProfile", userProfile);
+                console.log("postId", postId);
+                return nickname === userProfile.data.nickname;
+            } catch (error) {
+                console.error("Error fetching scraps:", error);
+            }
+        }
 
         const showPost = async () => {
             try {
@@ -59,6 +67,7 @@ export default {
                 console.log("response data: ", response.data);
                 console.log("response data data: ", response.data.data);
                 post.value = response.data.data;
+                nickname.value = response.data.data.authorNickname;
                 console.log("content [0] " , post.value[0]);
             } catch (error) {
                 console.error("Error fetching scraps:", error);
@@ -67,7 +76,8 @@ export default {
         showPost();
 
         return {
-            // isUserPost,
+            nickname,
+            isUserPost,
             post
         }
     }
