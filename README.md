@@ -1,7 +1,10 @@
-# 🎁 Miracle in cell No.5 - 5번방의 선물 🎁
+<h1 align="center">
+🎁 Miracle in cell No.5 - 5번방의 선물 🎁
+</h1>
 <br>
 
-<img width="536" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/b793a3b5-129c-431e-80f2-2ece190ecfc8">
+<img width="1006" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/4be2b079-8d2f-4f37-bd40-813524b9aed7">
+
 
 
 
@@ -63,14 +66,16 @@
 ## 📐 설계
 
 ### 💡ERD
-<img width="563" alt="image-2" src="https://github.com/beyond-sw-camp/be05-2nd-solbangul-Miracle_in_cell_No.5/assets/134581020/6fde9ba0-a34f-42c4-b158-ab38bfbd368c">
+![solbangul (1)](https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/e528d71a-975d-4f09-a826-f6b2ad7e1e3d)
+
 
 
 ### 💡API 설계
 <img width="646" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/f0b7a6f1-511c-4291-a052-9f8571f88d27">
 
 ### 💡초기 피그마 설계
-<img width="801" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/f6c095db-78c6-456b-b889-32c9da7fd5da">
+<img width="832" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/07dd6afc-16ad-4e0f-9318-228b1aaa9963">
+
 
 
 
@@ -88,24 +93,40 @@
 > 회원가입
 <img width="1280" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/c5e2350f-2a9f-4ada-b1ac-21a75a3749a6">
 <img width="1278" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/27c4e7f0-fd35-4c32-b139-1c3366c7041d">
-<img width="1280" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/3255de30-b4c9-464f-9a08-e9aec27cfab8">
+<img width="1278" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/8585fa67-2e26-41f8-bc59-3c01a6c50b94">
+
+
 
 
 
 
 
 > 메인화면
+<img width="1253" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/55c4180e-e931-4fd6-9239-c01a5405c319">
 
 
 
 > 로그인 사용자의 방
+<img width="1280" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/a828b3ca-c3af-4410-af31-c4de68dc8724">
+<img width="1280" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/f5421965-37dc-4ff0-998e-cc1812e151c5">
+
 
 
 
 > 다른 사용자의 방
+<img width="1280" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/0643c50d-3006-478f-9ebd-298b59bc900e">
+<img width="1280" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/98f5864f-1543-4505-b701-8aa68b2a4c28">
 
 
 > 마이페이지
+<img width="1278" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/e2c602fe-d87d-41a4-9b21-bf04ceb0593a">
+<img width="533" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/be0f3d2a-e838-43e6-88aa-927edf631b90">
+<img width="1280" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/7f459af4-355b-4416-b138-7a674858e84f">
+<img width="1280" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/34ae4156-8845-41f2-bea4-9295d1f989c3">
+<img width="1280" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/c580b6f1-6093-42e9-9f1f-76cd408644c3">
 
 
 > 확성기
+<img width="860" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/03ba48d7-a16a-451f-ae3c-592b90eae06f">
+<img width="1280" alt="image" src="https://github.com/beyond-sw-camp/be05-3rd-3team-Miracle_in_cell_No.5/assets/134581020/3cc4f686-5d28-41a0-acbf-3b3fb873c6ea">
+
